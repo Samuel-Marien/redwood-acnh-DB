@@ -18,6 +18,7 @@ const Routes = () => {
         <Route path="/bugs-page" page={BugsPagePage} name="bugsPage" />
         <Route path="/seacreature-page" page={SeacreaturePagePage} name="seacreaturePage" />
         <Route path="/fishs-page" page={FishsPagePage} name="fishsPage" />
+        <Route path="/details/{id}" page={DetailsPage} name="details" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>
