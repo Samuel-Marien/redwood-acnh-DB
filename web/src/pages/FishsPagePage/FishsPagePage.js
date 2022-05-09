@@ -2,6 +2,7 @@
 import { MetaTags } from '@redwoodjs/web'
 import { Form, TextField, Submit } from '@redwoodjs/forms'
 import { useState, useEffect } from 'react'
+import CardsDisplayer from 'src/components/CardsDisplayer/CardsDisplayer'
 
 const FishsPagePage = () => {
   const [state, setState] = useState([])
@@ -29,7 +30,7 @@ const FishsPagePage = () => {
     }
   }, [myArray, stateAll])
 
-  console.log(stateAll)
+  // console.log(stateAll)
   let nameTranslate = ''
 
   const onSubmit = (data) => {
@@ -45,7 +46,7 @@ const FishsPagePage = () => {
       .then((json) => setState(json))
   }
 
-  console.log(state)
+  // console.log(state)
   return (
     <>
       <MetaTags title="FishsPage" description="FishsPage page" />
@@ -58,6 +59,7 @@ const FishsPagePage = () => {
         />
         <Submit>Go</Submit>
       </Form>
+      <CardsDisplayer cardsDatas={stateAll} />
     </>
   )
 }
