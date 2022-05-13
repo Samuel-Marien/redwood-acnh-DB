@@ -19869,6 +19869,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-icons@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "react-icons@npm:4.3.1"
+  peerDependencies:
+    react: "*"
+  checksum: 08ee89dcfd5f134631b1e8c322541c30c70119c0fada0f61ed1a1cb044c8c31d7144ae24586b14b548b79d0e1d0dc2210845156b4f2b7184c898f845c3203d79
+  languageName: node
+  linkType: hard
+
 "react-inspector@npm:^5.1.0":
   version: 5.1.1
   resolution: "react-inspector@npm:5.1.1"
@@ -20682,6 +20691,7 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@redwoodjs/core": 1.3.1
+    react-icons: ^4.3.1
   languageName: unknown
   linkType: soft
 
