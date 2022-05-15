@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { MetaTags } from '@redwoodjs/web'
-import { Link, routes } from '@redwoodjs/router'
+import { routes } from '@redwoodjs/router'
 import { useState, useEffect } from 'react'
 import CardsDisplayer from 'src/components/CardsDisplayer/CardsDisplayer'
 import SearchBar from 'src/components/SearchBar/SearchBar'
+import Thumbnail from 'src/components/Thumbnail/Thumbnail'
 
 const FishsPagePage = () => {
   const [state, setState] = useState([])
@@ -32,9 +33,9 @@ const FishsPagePage = () => {
   }, [myArray, stateAll])
 
   // console.log(stateAll)
-  let nameTranslate = ''
 
   const onSubmit = (data) => {
+    let nameTranslate = ''
     myArray.map((item) => {
       if (data.fishname === item.fr) {
         nameTranslate = item.en
@@ -61,23 +62,11 @@ const FishsPagePage = () => {
         ressourcesName="Fishs"
       />
       {state.id ? (
-        <div className="border p-2 m-2 shadow w-48">
-          <Link to={routes.details({ id: state.id })}>
-            <div className="flex justify-between items-center">
-              <p>{state.name['name-EUfr']}</p>
-              <p className="text-xs">#{state.id}</p>
-            </div>
-            <img src={state.icon_uri} alt={state.name['name-EUfr']} />
-            <p className="text-center mb-2">{state.price} $</p>
-            <div className="flex justify-between">
-              <p className="w-1/3 flex justify-center px-1 py-1 bg-yellow-500 text-white text-sm font-medium rounded-full">
-                {state.availability.location}
-              </p>
-              <p className=" flex justify-center px-1 py-1 bg-red-500 text-white text-sm font-medium rounded-full">
-                {state.availability.rarity}
-              </p>
-            </div>
-          </Link>
+        <div className="flex justify-center my-2">
+          <Thumbnail
+            state={state}
+            myRoutes={routes.details({ id: state.id })}
+          />
         </div>
       ) : null}
       <CardsDisplayer cardsDatas={stateAll} />
