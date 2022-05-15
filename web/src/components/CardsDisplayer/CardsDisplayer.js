@@ -17,7 +17,6 @@ const CardsDisplayer = (props) => {
 
   return (
     <div>
-      <h2>{'CardsDisplayer'}</h2>
       <div className="border p-2 flex flex-row flex-wrap">
         {datasSanityze
           ? datasSanityze.map((item) => {
