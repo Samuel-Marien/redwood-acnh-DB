@@ -1,4 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link, routes } from '@redwoodjs/router'
+import { useState, useEffect } from 'react'
+import { Pagination } from 'react-pagination-bar'
+import 'react-pagination-bar/dist/index.css'
+import './index.css'
 
 const Card = (props) => {
   const { item } = props
@@ -36,7 +41,8 @@ const Card = (props) => {
 
 const CardsDisplayer = (props) => {
   const { cardsDatas, dataBase } = props
-
+  const [currentPage, setCurrentPage] = useState(1)
+  const pagePostsLimit = 15
   const datasSanityze = []
 
   try {
@@ -47,22 +53,53 @@ const CardsDisplayer = (props) => {
     console.log(err)
   }
 
-  // console.log(datasSanityze)
+  useEffect(() => {
+    console.log(datasSanityze.length)
+  }, [datasSanityze])
 
   return (
-    <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-myBrown-200 pt-7">
+    <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-myBrown-200 pt-7 ">
+      {datasSanityze.length ? (
+        <Pagination
+          initialPage={currentPage}
+          itemsPerPage={pagePostsLimit}
+          onPageСhange={(pageNumber) => setCurrentPage(pageNumber)}
+          totalItems={datasSanityze.length}
+          pageNeighbours={2}
+          startLabel={'<<'}
+          endLabel={'>>'}
+          nextLabel={'>'}
+          prevLabel={'<'}
+          customClassNames={{
+            rpbItemClassName: 'bg-myBrown-100 px-2 m-1 rounded-full ',
+            rpbItemClassNameActive:
+              'bg-yellow-500 text-myBrown-100 custom-item--active',
+            rpbGoItemClassName: 'custom-go-item',
+            rpbItemClassNameDisable: 'opacity-50',
+            rpbProgressClassName: 'custom-progress-bar',
+            rpbRootClassName:
+              'custom-root font-inika text-myYellow-100  flex justify-center mb-1',
+          }}
+        />
+      ) : null}
+
       <div className="flex flex-row  justify-center flex-wrap">
         {datasSanityze
-          ? datasSanityze.map((item) => {
-              return (
-                <Link
-                  to={routes.details({ id: item.id, dataBase })}
-                  key={item.id}
-                >
-                  <Card item={item} />
-                </Link>
+          ? datasSanityze
+              .slice(
+                (currentPage - 1) * pagePostsLimit,
+                (currentPage - 1) * pagePostsLimit + pagePostsLimit
               )
-            })
+              .map((item) => {
+                return (
+                  <Link
+                    to={routes.details({ id: item.id, dataBase })}
+                    key={item.id}
+                  >
+                    <Card item={item} />
+                  </Link>
+                )
+              })
           : null}
       </div>
     </div>

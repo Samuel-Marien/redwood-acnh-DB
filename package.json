@@ -23,6 +23,7 @@
   },
   "packageManager": "yarn@3.2.0",
   "dependencies": {
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "react-pagination-bar": "^1.0.8"
   }
 }
