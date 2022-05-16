@@ -2,6 +2,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { Form, TextField, Submit } from '@redwoodjs/forms'
 import { GiArchiveResearch } from 'react-icons/gi'
 import { BiReset } from 'react-icons/bi'
+import { DiDatabase } from 'react-icons/di'
 
 const SearchBar = (props) => {
   const {
@@ -16,9 +17,12 @@ const SearchBar = (props) => {
   return (
     <div className="mb-5 flex flex-col justify-center items-center">
       <img src="images/illustration-cut.jpg" alt="hero" />
-      <h1 className="text-4xl mb-3 font-inika font-bold text-myBrown-100">
-        {ressourcesName} Ressources
-      </h1>
+      <div className=" flex items-center text-4xl mb-3 font-inika font-bold text-myBrown-100">
+        <span className="text-myYellow-100 text-5xl mr-2">
+          <DiDatabase />
+        </span>
+        <h1 className="">{ressourcesName} DataBase</h1>
+      </div>
       <div className="flex justify-center items-center">
         {state.id ? (
           <div>
