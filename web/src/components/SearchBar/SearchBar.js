@@ -4,7 +4,15 @@ import { GiArchiveResearch } from 'react-icons/gi'
 import { BiReset } from 'react-icons/bi'
 
 const SearchBar = (props) => {
-  const { state, onSubmit, onClick, name, placeholder, ressourcesName } = props
+  const {
+    state,
+    onSubmit,
+    onClick,
+    name,
+    placeholder,
+    ressourcesName,
+    dataBase,
+  } = props
   return (
     <div className="mb-5 flex flex-col justify-center items-center">
       <img src="images/illustration-cut.jpg" alt="hero" />
@@ -34,7 +42,7 @@ const SearchBar = (props) => {
             />
             {state.id ? (
               <Link
-                to={routes.details({ id: state.id })}
+                to={routes.details({ id: state.id, dataBase })}
                 style={{ transform: 'translate(-120%)' }}
                 className="mt-1"
               >

@@ -2,22 +2,20 @@ import { MetaTags } from '@redwoodjs/web'
 import { useEffect, useState } from 'react'
 import Details from 'src/components/Details/Details'
 
-const DetailsPage = ({ id }) => {
+const DetailsPage = ({ id, dataBase }) => {
   const [state, setState] = useState([])
 
   useEffect(() => {
-    fetch(`https://acnhapi.com/v1/fish/${id}`)
+    fetch(`https://acnhapi.com/v1/${dataBase}/${id}`)
       .then((response) => response.json())
       .then((json) => setState(json))
-  }, [id])
+  }, [id, dataBase])
 
   console.log(state)
 
   return (
     <>
       <MetaTags title="Details" description="Details page" />
-
-      <h1>DetailsPage</h1>
 
       <Details data={state} />
     </>

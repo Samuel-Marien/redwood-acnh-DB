@@ -48,11 +48,10 @@ const FishsPagePage = () => {
       .then((json) => setState(json))
   }
 
-  console.log(state.id)
+  // console.log(state.id)
   return (
     <>
       <MetaTags title="FishsPage" description="FishsPage page" />
-
       <SearchBar
         name="fishname"
         placeholder="Fish name..."
@@ -60,16 +59,17 @@ const FishsPagePage = () => {
         onClick={() => setState([])}
         state={state}
         ressourcesName="Fishs"
+        dataBase="fish"
       />
       {state.id ? (
         <div className="flex justify-center my-2">
           <Thumbnail
             state={state}
-            myRoutes={routes.details({ id: state.id })}
+            myRoutes={routes.details({ id: state.id, dataBase: 'fish' })}
           />
         </div>
       ) : null}
-      <CardsDisplayer cardsDatas={stateAll} />
+      <CardsDisplayer cardsDatas={stateAll} dataBase="fish" />
     </>
   )
 }
