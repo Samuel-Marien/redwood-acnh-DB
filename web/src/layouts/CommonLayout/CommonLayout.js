@@ -41,7 +41,7 @@ const LoginBlock = () => {
       <MyLink
         name="Login"
         icon={<RiLoginCircleFill />}
-        myRoutes={routes.bugsPage()}
+        myRoutes={routes.bugs()}
       />
       <div className="flex flex-col">
         <span className="mb-2 text-myGreen-100 hover:text-myGreen-200 cursor-pointer">
@@ -103,43 +103,39 @@ const CommonLayout = ({ children }) => {
               <MyLink
                 name="Sea creat."
                 icon={<GiSeahorse />}
-                myRoutes={routes.seacreaturePage()}
+                myRoutes={routes.seaCreatures()}
               />
               <MyLink
                 name="Bugs"
                 icon={<GiSpottedBug />}
-                myRoutes={routes.bugsPage()}
+                myRoutes={routes.bugs()}
               />
               <MyLink
                 name="Villagers"
                 icon={<GiBearFace />}
-                myRoutes={routes.bugsPage()}
+                myRoutes={routes.bugs()}
               />
               <MyLink
                 name="Songs"
                 icon={<GiLoveSong />}
-                myRoutes={routes.bugsPage()}
+                myRoutes={routes.bugs()}
               />
               <MyLink
                 name="Arts"
                 icon={<GiPaintBrush />}
-                myRoutes={routes.bugsPage()}
+                myRoutes={routes.bugs()}
               />
               <MyLink
                 name="House"
                 icon={<GiFamilyHouse />}
-                myRoutes={routes.bugsPage()}
+                myRoutes={routes.bugs()}
               />
               <MyLink
                 name="Paper"
                 icon={<GiStoneWall />}
-                myRoutes={routes.bugsPage()}
+                myRoutes={routes.bugs()}
               />
-              <MyLink
-                name="Misc"
-                icon={<GiCubes />}
-                myRoutes={routes.bugsPage()}
-              />
+              <MyLink name="Misc" icon={<GiCubes />} myRoutes={routes.bugs()} />
             </div>
           </div>
           <div className="lg:flex hidden" items-center>
@@ -159,62 +155,62 @@ const CommonLayout = ({ children }) => {
                 <MyTinyLink
                   name="Sea creat."
                   icon={<GiSeahorse />}
-                  myRoutes={routes.seacreaturePage()}
+                  myRoutes={routes.seaCreatures()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Bugs"
                   icon={<GiSpottedBug />}
-                  myRoutes={routes.bugsPage()}
+                  myRoutes={routes.bugs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Villagers"
                   icon={<GiBearFace />}
-                  myRoutes={routes.bugsPage()}
+                  myRoutes={routes.bugs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Songs"
                   icon={<GiLoveSong />}
-                  myRoutes={routes.bugsPage()}
+                  myRoutes={routes.bugs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Arts"
                   icon={<GiPaintBrush />}
-                  myRoutes={routes.bugsPage()}
+                  myRoutes={routes.bugs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="House"
                   icon={<GiFamilyHouse />}
-                  myRoutes={routes.bugsPage()}
+                  myRoutes={routes.bugs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Paper"
                   icon={<GiStoneWall />}
-                  myRoutes={routes.bugsPage()}
+                  myRoutes={routes.bugs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Misc"
                   icon={<GiCubes />}
-                  myRoutes={routes.bugsPage()}
+                  myRoutes={routes.bugs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
 
                 <MyTinyLink
                   name="Login"
                   icon={<RiLoginCircleFill />}
-                  myRoutes={routes.bugsPage()}
+                  myRoutes={routes.bugs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Logout"
                   icon={<RiLogoutCircleRLine />}
-                  myRoutes={routes.bugsPage()}
+                  myRoutes={routes.bugs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
               </ul>
