@@ -147,9 +147,9 @@ const CardsDisplayer = (props) => {
   // console.log(data)
 
   return (
-    <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-myBrown-200 pt-7 ">
-      <div className="flex items-center justify-center">
-        <div className="p-4">
+    <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-gradient-to-t via-myBrown-200  from-myBrown-200">
+      <div className="flex items-center justify-center pb-10">
+        <div className="px-4">
           <div className="group relative">
             <button className="bg-myBrown-100 text-white px-4 h-8 rounded">
               Sort
