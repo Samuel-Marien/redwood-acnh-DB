@@ -19,6 +19,7 @@ import {
   GiStoneWall,
   GiZigzagLeaf,
 } from 'react-icons/gi'
+import { FaGithubSquare, FaTwitterSquare, FaLinkedin } from 'react-icons/fa'
 
 const MyLink = (props) => {
   const { myRoutes, icon, name } = props
@@ -219,6 +220,60 @@ const CommonLayout = ({ children }) => {
         </div>
       </header>
       <main>{children}</main>
+      <div className=" bg-myBrown-100 w-full py-4 flex justify-center">
+        <div className="flex items-center">
+          <Link to={routes.home()}>
+            <div className="flex items-center text-myBrown-200">
+              <div className="border-2 border-myBrown-200 shadow-lg p-1 rounded-xl bg-myYellow-200">
+                <GiZigzagLeaf size={40} color={'#786951'} />
+              </div>
+              <p className="font-inika text-4xl ml-2  font-black tracking-tight">
+                ACNH <span className=" text-myGreen-100">DB</span>
+              </p>
+            </div>
+          </Link>
+          <p className="text-myBrown-200 text-sm ml-5 pl-4 border-l border-r pr-4 flex">
+            Buil with ❤️ /{' '}
+            <a href="https://redwoodjs.com/" className="flex">
+              <span className="mx-1">RedwoodJs</span>
+              <img src="favicon.png" alt="icon redwood" className="w-5" />
+            </a>{' '}
+            <a href="http://acnhapi.com/" className="flex">
+              <span className="mx-1">/ ACNH API</span>
+              <img src="favicon-acnh.png" alt="icon redwood" className="w-5" />
+            </a>
+          </p>
+          <p className="ml-5 text-2xl text-myYellow-100 flex">
+            <a
+              className="hover:text-myGreen-100"
+              href="https://github.com/Samuel-Marien"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {' '}
+              <FaGithubSquare />
+            </a>
+            <a
+              className="hover:text-myGreen-100 ml-2"
+              href="https://twitter.com/Samuel_Marien"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {' '}
+              <FaTwitterSquare />
+            </a>
+            <a
+              className="hover:text-myGreen-100 ml-2"
+              href="https://www.linkedin.com/in/samuel-marien/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {' '}
+              <FaLinkedin />
+            </a>
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
