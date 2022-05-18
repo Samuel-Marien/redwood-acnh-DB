@@ -4,6 +4,12 @@ import { useState } from 'react'
 import { Pagination } from 'react-pagination-bar'
 import 'react-pagination-bar/dist/index.css'
 import './index.css'
+import {
+  BsSortNumericDown,
+  BsSortNumericUpAlt,
+  BsSortAlphaDown,
+  BsSortAlphaUpAlt,
+} from 'react-icons/bs'
 
 const Card = (props) => {
   const { item } = props
@@ -39,12 +45,19 @@ const Card = (props) => {
   )
 }
 
-const SortButton = (props) => {
-  const { title, onClick } = props
+const MySortButton = (props) => {
+  const { name, icon, onClick } = props
+
   return (
-    <button className="border p-1" onClick={onClick}>
-      {title}
-    </button>
+    <li className=" hover:bg-myBrown-100 ">
+      <button
+        onClick={onClick}
+        className="text-lg flex items-center p-2 hover:text-myYellow-200"
+      >
+        <span className="text-sm font-inika font-extrabold">{name}</span>
+        {icon}
+      </button>
+    </li>
   )
 }
 
@@ -85,15 +98,8 @@ const CardsDisplayer = (props) => {
     let mapped = datasSanityze.map(function (e, i) {
       return { index: i, item: e, value: e.name['name-EUfr'] }
     })
-    // console.log(mapped)
+
     mapped.sort(function (a, b) {
-      // if (a.value > b.value) {
-      //   return 1
-      // }
-      // if (a.value < b.value) {
-      //   return -1
-      // }
-      // return 0
       return a.value.localeCompare(b.value)
     })
     let result
@@ -108,8 +114,6 @@ const CardsDisplayer = (props) => {
         })
         .reverse()
     }
-
-    console.log(result)
     setData(result)
   }
 
@@ -117,15 +121,8 @@ const CardsDisplayer = (props) => {
     let mapped = datasSanityze.map(function (e, i) {
       return { index: i, item: e, value: e.availability.rarity }
     })
-    // console.log(mapped)
+
     mapped.sort(function (a, b) {
-      // if (a.value > b.value) {
-      //   return 1
-      // }
-      // if (a.value < b.value) {
-      //   return -1
-      // }
-      // return 0
       return a.value.localeCompare(b.value)
     })
     let result
@@ -140,8 +137,6 @@ const CardsDisplayer = (props) => {
         })
         .reverse()
     }
-
-    console.log(result)
     setData(result)
   }
 
@@ -149,60 +144,82 @@ const CardsDisplayer = (props) => {
 
   return (
     <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-myBrown-200 pt-7 ">
-      <div className="flex">
-        <SortButton
-          onClick={() => sortFunction('id', 'asc')}
-          title="Sort by id - to +"
-        />
-        <SortButton
-          onClick={() => sortFunction('id', 'des')}
-          title="Sort by id + to -"
-        />
-        <SortButton
-          onClick={() => sortFunction('price', 'asc')}
-          title="Sort by price - to +"
-        />
-        <SortButton
-          onClick={() => sortFunction('price', 'des')}
-          title=" Sort by price + to -"
-        />
-        <SortButton
-          onClick={() => sortFunction2('asc')}
-          title="Sort by name - to +"
-        />
-        <SortButton
-          onClick={() => sortFunction2('des')}
-          title="Sort by name + to -"
-        />
-        <SortButton
-          onClick={() => sortFunction3('asc')}
-          title="Sort by rarity - to +"
-        />
-        <SortButton
-          onClick={() => sortFunction3('des')}
-          title="Sort by rarity + to -"
-        />
+      <div className="flex items-center justify-center">
+        <div className="p-4">
+          <div className="group relative">
+            <button className="bg-myBrown-100 text-white px-4 h-8 rounded">
+              Sort
+            </button>
+            <nav
+              className=" border-2 bg-white invisible border-myBrown-100 rounded w-32 absolute left-0 top-full
+          transition-all opacity-0 group-focus-within:visible group-focus-within:opacity-90 group-focus-within:translate-y-1"
+            >
+              <ul className="py-1">
+                <MySortButton
+                  name="Id"
+                  icon={<BsSortNumericDown />}
+                  onClick={() => sortFunction('id', 'asc')}
+                />
+                <MySortButton
+                  name="Id"
+                  icon={<BsSortNumericUpAlt />}
+                  onClick={() => sortFunction('id', 'des')}
+                />
+                <MySortButton
+                  name="Price"
+                  icon={<BsSortNumericDown />}
+                  onClick={() => sortFunction('price', 'asc')}
+                />
+                <MySortButton
+                  name="Price"
+                  icon={<BsSortNumericUpAlt />}
+                  onClick={() => sortFunction('price', 'des')}
+                />
+                <MySortButton
+                  name="Name"
+                  icon={<BsSortAlphaDown />}
+                  onClick={() => sortFunction2('asc')}
+                />
+                <MySortButton
+                  name="Name"
+                  icon={<BsSortAlphaUpAlt />}
+                  onClick={() => sortFunction2('des')}
+                />
+                <MySortButton
+                  name="Rarity"
+                  icon={<BsSortAlphaUpAlt />}
+                  onClick={() => sortFunction3('asc')}
+                />
+                <MySortButton
+                  name="Rarity"
+                  icon={<BsSortAlphaUpAlt />}
+                  onClick={() => sortFunction3('des')}
+                />
+              </ul>
+            </nav>
+          </div>
+        </div>
+        {datasSanityze.length ? (
+          <Pagination
+            initialPage={currentPage}
+            itemsPerPage={pagePostsLimit}
+            onPageСhange={(pageNumber) => setCurrentPage(pageNumber)}
+            totalItems={datasSanityze.length}
+            pageNeighbours={1}
+            startLabel={'<<'}
+            endLabel={'>>'}
+            nextLabel={'>'}
+            prevLabel={'<'}
+            customClassNames={{
+              rpbItemClassName: 'bg-myBrown-100 px-2 m-1 rounded-full ',
+              rpbItemClassNameActive: 'bg-yellow-500 text-myBrown-100',
+              rpbItemClassNameDisable: 'opacity-50 ',
+              rpbRootClassName:
+                'custom-root font-inika text-myYellow-100  flex justify-center mb-1',
+            }}
+          />
+        ) : null}
       </div>
-      {datasSanityze.length ? (
-        <Pagination
-          initialPage={currentPage}
-          itemsPerPage={pagePostsLimit}
-          onPageСhange={(pageNumber) => setCurrentPage(pageNumber)}
-          totalItems={datasSanityze.length}
-          pageNeighbours={2}
-          startLabel={'<<'}
-          endLabel={'>>'}
-          nextLabel={'>'}
-          prevLabel={'<'}
-          customClassNames={{
-            rpbItemClassName: 'bg-myBrown-100 px-2 m-1 rounded-full ',
-            rpbItemClassNameActive: 'bg-yellow-500 text-myBrown-100',
-            rpbItemClassNameDisable: 'opacity-50 ',
-            rpbRootClassName:
-              'custom-root font-inika text-myYellow-100  flex justify-center mb-1',
-          }}
-        />
-      ) : null}
 
       <div className="flex flex-row  justify-center flex-wrap">
         {data.length < 1 && datasSanityze
@@ -236,6 +253,28 @@ const CardsDisplayer = (props) => {
                   </Link>
                 )
               })}
+      </div>
+      <div className="py-5 flex items-center justify-center">
+        {datasSanityze.length ? (
+          <Pagination
+            initialPage={currentPage}
+            itemsPerPage={pagePostsLimit}
+            onPageСhange={(pageNumber) => setCurrentPage(pageNumber)}
+            totalItems={datasSanityze.length}
+            pageNeighbours={1}
+            startLabel={'<<'}
+            endLabel={'>>'}
+            nextLabel={'>'}
+            prevLabel={'<'}
+            customClassNames={{
+              rpbItemClassName: 'bg-myBrown-100 px-2 m-1 rounded-full ',
+              rpbItemClassNameActive: 'bg-yellow-500 text-myBrown-100',
+              rpbItemClassNameDisable: 'opacity-50 ',
+              rpbRootClassName:
+                'custom-root font-inika text-myYellow-100  flex justify-center mb-1',
+            }}
+          />
+        ) : null}
       </div>
     </div>
   )
