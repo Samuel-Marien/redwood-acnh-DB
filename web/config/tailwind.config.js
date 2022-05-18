@@ -21,7 +21,6 @@ module.exports = {
       },
       fontFamily: {
         inika: ['Inika', 'serif'],
-        subtitleFont: ['NTR'],
       },
     },
   },

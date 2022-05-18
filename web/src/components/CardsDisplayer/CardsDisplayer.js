@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, routes } from '@redwoodjs/router'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Pagination } from 'react-pagination-bar'
 import 'react-pagination-bar/dist/index.css'
 import './index.css'
@@ -39,11 +39,21 @@ const Card = (props) => {
   )
 }
 
+const SortButton = (props) => {
+  const { title, onClick } = props
+  return (
+    <button className="border p-1" onClick={onClick}>
+      {title}
+    </button>
+  )
+}
+
 const CardsDisplayer = (props) => {
   const { cardsDatas, dataBase } = props
   const [currentPage, setCurrentPage] = useState(1)
-  const pagePostsLimit = 15
+  const pagePostsLimit = 10
   const datasSanityze = []
+  const [data, setData] = useState([])
 
   try {
     for (let item of Object.getOwnPropertyNames(cardsDatas)) {
@@ -53,12 +63,126 @@ const CardsDisplayer = (props) => {
     console.log(err)
   }
 
-  useEffect(() => {
-    console.log(datasSanityze.length)
-  }, [datasSanityze])
+  const sortFunction = (type, level) => {
+    if (level === 'asc') {
+      const sorted = datasSanityze.sort(function (a, b) {
+        return a[type] - b[type]
+      })
+      setData(sorted)
+    } else if (level === 'des') {
+      const sorted = datasSanityze
+        .sort(function (a, b) {
+          return a[type] - b[type]
+        })
+        .reverse()
+      setData(sorted)
+    } else {
+      console.log('Some error with sorting methods!')
+    }
+  }
+
+  const sortFunction2 = (level) => {
+    let mapped = datasSanityze.map(function (e, i) {
+      return { index: i, item: e, value: e.name['name-EUfr'] }
+    })
+    // console.log(mapped)
+    mapped.sort(function (a, b) {
+      // if (a.value > b.value) {
+      //   return 1
+      // }
+      // if (a.value < b.value) {
+      //   return -1
+      // }
+      // return 0
+      return a.value.localeCompare(b.value)
+    })
+    let result
+    if (level === 'asc') {
+      result = mapped.map(function (e) {
+        return datasSanityze[e.index]
+      })
+    } else {
+      result = mapped
+        .map(function (e) {
+          return datasSanityze[e.index]
+        })
+        .reverse()
+    }
+
+    console.log(result)
+    setData(result)
+  }
+
+  const sortFunction3 = (level) => {
+    let mapped = datasSanityze.map(function (e, i) {
+      return { index: i, item: e, value: e.availability.rarity }
+    })
+    // console.log(mapped)
+    mapped.sort(function (a, b) {
+      // if (a.value > b.value) {
+      //   return 1
+      // }
+      // if (a.value < b.value) {
+      //   return -1
+      // }
+      // return 0
+      return a.value.localeCompare(b.value)
+    })
+    let result
+    if (level === 'asc') {
+      result = mapped.map(function (e) {
+        return datasSanityze[e.index]
+      })
+    } else {
+      result = mapped
+        .map(function (e) {
+          return datasSanityze[e.index]
+        })
+        .reverse()
+    }
+
+    console.log(result)
+    setData(result)
+  }
+
+  // console.log(data)
 
   return (
     <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-myBrown-200 pt-7 ">
+      <div className="flex">
+        <SortButton
+          onClick={() => sortFunction('id', 'asc')}
+          title="Sort by id - to +"
+        />
+        <SortButton
+          onClick={() => sortFunction('id', 'des')}
+          title="Sort by id + to -"
+        />
+        <SortButton
+          onClick={() => sortFunction('price', 'asc')}
+          title="Sort by price - to +"
+        />
+        <SortButton
+          onClick={() => sortFunction('price', 'des')}
+          title=" Sort by price + to -"
+        />
+        <SortButton
+          onClick={() => sortFunction2('asc')}
+          title="Sort by name - to +"
+        />
+        <SortButton
+          onClick={() => sortFunction2('des')}
+          title="Sort by name + to -"
+        />
+        <SortButton
+          onClick={() => sortFunction3('asc')}
+          title="Sort by rarity - to +"
+        />
+        <SortButton
+          onClick={() => sortFunction3('des')}
+          title="Sort by rarity + to -"
+        />
+      </div>
       {datasSanityze.length ? (
         <Pagination
           initialPage={currentPage}
@@ -72,11 +196,8 @@ const CardsDisplayer = (props) => {
           prevLabel={'<'}
           customClassNames={{
             rpbItemClassName: 'bg-myBrown-100 px-2 m-1 rounded-full ',
-            rpbItemClassNameActive:
-              'bg-yellow-500 text-myBrown-100 custom-item--active',
-            rpbGoItemClassName: 'custom-go-item',
-            rpbItemClassNameDisable: 'opacity-50',
-            rpbProgressClassName: 'custom-progress-bar',
+            rpbItemClassNameActive: 'bg-yellow-500 text-myBrown-100',
+            rpbItemClassNameDisable: 'opacity-50 ',
             rpbRootClassName:
               'custom-root font-inika text-myYellow-100  flex justify-center mb-1',
           }}
@@ -84,7 +205,7 @@ const CardsDisplayer = (props) => {
       ) : null}
 
       <div className="flex flex-row  justify-center flex-wrap">
-        {datasSanityze
+        {data.length < 1 && datasSanityze
           ? datasSanityze
               .slice(
                 (currentPage - 1) * pagePostsLimit,
@@ -100,7 +221,21 @@ const CardsDisplayer = (props) => {
                   </Link>
                 )
               })
-          : null}
+          : data
+              .slice(
+                (currentPage - 1) * pagePostsLimit,
+                (currentPage - 1) * pagePostsLimit + pagePostsLimit
+              )
+              .map((item) => {
+                return (
+                  <Link
+                    to={routes.details({ id: item.id, dataBase })}
+                    key={item.id}
+                  >
+                    <Card item={item} />
+                  </Link>
+                )
+              })}
       </div>
     </div>
   )
