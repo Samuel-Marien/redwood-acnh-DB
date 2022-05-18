@@ -10,6 +10,9 @@ import {
   BsSortAlphaDown,
   BsSortAlphaUpAlt,
 } from 'react-icons/bs'
+import { GiPriceTag, GiCutDiamond } from 'react-icons/gi'
+import { HiOutlineHashtag } from 'react-icons/hi'
+import { FaUserTag } from 'react-icons/fa'
 
 const Card = (props) => {
   const { item } = props
@@ -46,16 +49,17 @@ const Card = (props) => {
 }
 
 const MySortButton = (props) => {
-  const { name, icon, onClick } = props
+  const { name, icon, icon2, onClick } = props
 
   return (
-    <li className=" hover:bg-myBrown-100 ">
+    <li className=" hover:bg-myBrown-100 hover:text-myYellow-200">
       <button
         onClick={onClick}
-        className="text-lg flex items-center p-2 hover:text-myYellow-200"
+        className="text-lg flex items-center p-2  border-t w-full  justify-between"
       >
-        <span className="text-sm font-inika font-extrabold">{name}</span>
-        {icon}
+        <span className="mr-2">{icon2}</span>
+        <span className="text-sm font-inika font-extrabold">By {name}</span>
+        <span className="ml-1">{icon}</span>
       </button>
     </li>
   )
@@ -151,48 +155,56 @@ const CardsDisplayer = (props) => {
               Sort
             </button>
             <nav
-              className=" border-2 bg-white invisible border-myBrown-100 rounded w-32 absolute left-0 top-full
+              className=" border-2 bg-white invisible border-myBrown-100 rounded w-36 absolute left-0 top-full
           transition-all opacity-0 group-focus-within:visible group-focus-within:opacity-90 group-focus-within:translate-y-1"
             >
               <ul className="py-1">
                 <MySortButton
                   name="Id"
+                  icon2={<HiOutlineHashtag />}
                   icon={<BsSortNumericDown />}
                   onClick={() => sortFunction('id', 'asc')}
                 />
                 <MySortButton
                   name="Id"
+                  icon2={<HiOutlineHashtag />}
                   icon={<BsSortNumericUpAlt />}
                   onClick={() => sortFunction('id', 'des')}
                 />
                 <MySortButton
                   name="Price"
                   icon={<BsSortNumericDown />}
+                  icon2={<GiPriceTag />}
                   onClick={() => sortFunction('price', 'asc')}
                 />
                 <MySortButton
                   name="Price"
                   icon={<BsSortNumericUpAlt />}
+                  icon2={<GiPriceTag />}
                   onClick={() => sortFunction('price', 'des')}
                 />
                 <MySortButton
                   name="Name"
+                  icon2={<FaUserTag />}
                   icon={<BsSortAlphaDown />}
                   onClick={() => sortFunction2('asc')}
                 />
                 <MySortButton
                   name="Name"
                   icon={<BsSortAlphaUpAlt />}
+                  icon2={<FaUserTag />}
                   onClick={() => sortFunction2('des')}
                 />
                 <MySortButton
                   name="Rarity"
-                  icon={<BsSortAlphaUpAlt />}
+                  icon={<BsSortAlphaDown />}
+                  icon2={<GiCutDiamond />}
                   onClick={() => sortFunction3('asc')}
                 />
                 <MySortButton
                   name="Rarity"
                   icon={<BsSortAlphaUpAlt />}
+                  icon2={<GiCutDiamond />}
                   onClick={() => sortFunction3('des')}
                 />
               </ul>
