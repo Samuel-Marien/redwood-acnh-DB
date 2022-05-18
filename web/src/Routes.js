@@ -10,6 +10,8 @@ const Routes = () => {
         <Route path="/fishs-page" page={FishsPagePage} name="fishsPage" />
         <Route path="/sea-creatures" page={SeaCreaturesPage} name="seaCreatures" />
         <Route path="/bugs" page={BugsPage} name="bugs" />
+        <Route path="/villagers" page={VillagersPage} name="villagers" />
+        <Route path="/songs" page={SongsPage} name="songs" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>

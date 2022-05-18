@@ -6,14 +6,14 @@ import CardsDisplayer from 'src/components/CardsDisplayer/CardsDisplayer'
 import SearchBar from 'src/components/SearchBar/SearchBar'
 import Thumbnail from 'src/components/Thumbnail/Thumbnail'
 
-const SeaCreaturesPage = () => {
+const VillagersPage = () => {
   const [state, setState] = useState([])
   const [stateAll, setStateAll] = useState({})
 
   const myArray = []
 
   useEffect(() => {
-    fetch(`http://acnhapi.com/v1/sea/`)
+    fetch(`https://acnhapi.com/v1/villagers/`)
       .then((response) => response.json())
       .then((json) => setStateAll(json))
   }, [])
@@ -38,10 +38,10 @@ const SeaCreaturesPage = () => {
       if (data.username === item.fr) {
         nameTranslate = item.en
       } else {
-        console.log('Searching for match...')
+        console.log('plop...')
       }
     })
-    fetch(`https://acnhapi.com/v1/sea/${nameTranslate}`)
+    fetch(`https://acnhapi.com/v1/villagers/${nameTranslate}`)
       .then((response) => response.json())
       .then((json) => setState(json))
   }
@@ -50,28 +50,28 @@ const SeaCreaturesPage = () => {
 
   return (
     <>
-      <MetaTags title="SeaCreatures" description="SeaCreatures page" />
+      <MetaTags title="Villagers" description="Villagers page" />
 
       <SearchBar
         name="username"
-        placeholder="Sea name..."
+        placeholder="Villagers name..."
         onSubmit={onSubmit}
         onClick={() => setState([])}
         state={state}
-        ressourcesName="Sea"
-        dataBase="sea"
+        ressourcesName="Villagers"
+        dataBase="villagers"
       />
       {state.id ? (
         <div className="flex justify-center my-2">
           <Thumbnail
             state={state}
-            myRoutes={routes.details({ id: state.id, dataBase: 'sea' })}
+            myRoutes={routes.details({ id: state.id, dataBase: 'villagers' })}
           />
         </div>
       ) : null}
-      <CardsDisplayer cardsDatas={stateAll} dataBase="sea" />
+      <CardsDisplayer cardsDatas={stateAll} dataBase="villagers" />
     </>
   )
 }
 
-export default SeaCreaturesPage
+export default VillagersPage

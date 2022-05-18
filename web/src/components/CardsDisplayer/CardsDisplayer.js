@@ -26,24 +26,37 @@ const Card = (props) => {
           #<span className="text-lg font-bold text-myBrown-100">{item.id}</span>
         </p>
       </div>
-      <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
-        <img src={item.icon_uri} alt={item.name['name-EUfr']} />
-      </div>
-      <p className="text-center mb-2 text-xl font-bold text-myBrown-100">
-        {item.price} $
-      </p>
-      <div className="flex justify-between">
-        <p className="w-1/3 flex justify-center px-3 py-1 bg-myYellow-100 text-white text-sm font-medium rounded-full">
-          {item.availability.location.slice(0, 5) === 'River'
+      {item.icon_uri ? (
+        <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
+          <img src={item.icon_uri} alt={item.name['name-EUfr']} />
+        </div>
+      ) : (
+        <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
+          <img src={item.image_uri} alt={item.name['name-EUfr']} />
+        </div>
+      )}
+
+      {item.price ? (
+        <p className="text-center mb-2 text-xl font-bold text-myBrown-100">
+          {item.price} $
+        </p>
+      ) : null}
+
+      {item.availability ? (
+        <div className="flex justify-between">
+          <p className="w-1/3 flex justify-center px-3 py-1 bg-myYellow-100 text-white text-sm font-medium rounded-full">
+            {/* {item.availability.location.slice(0, 5) === 'River'
             ? item.availability.location.slice(0, 5)
             : item.availability.location.slice(0, 3) === 'Sea'
             ? item.availability.location.slice(0, 3)
-            : item.availability.location}
-        </p>
-        <p className=" flex justify-center  px-3 py-1 bg-myBrown-100 text-myYellow-100 text-sm font-medium rounded-full">
-          {item.availability.rarity}
-        </p>
-      </div>
+            : item.availability.location} */}
+            {item.availability.location ? item.availability.location : 'N/A'}
+          </p>
+          <p className=" flex justify-center  px-3 py-1 bg-myBrown-100 text-myYellow-100 text-sm font-medium rounded-full">
+            {item.availability.rarity ? item.availability.rarity : 'N/A'}
+          </p>
+        </div>
+      ) : null}
     </div>
   )
 }
@@ -144,7 +157,7 @@ const CardsDisplayer = (props) => {
     setData(result)
   }
 
-  // console.log(data)
+  console.log(dataBase)
 
   return (
     <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-gradient-to-t via-myBrown-200  from-myBrown-200">
@@ -171,18 +184,20 @@ const CardsDisplayer = (props) => {
                   icon={<BsSortNumericUpAlt />}
                   onClick={() => sortFunction('id', 'des')}
                 />
-                <MySortButton
-                  name="Price"
-                  icon={<BsSortNumericDown />}
-                  icon2={<GiPriceTag />}
-                  onClick={() => sortFunction('price', 'asc')}
-                />
-                <MySortButton
-                  name="Price"
-                  icon={<BsSortNumericUpAlt />}
-                  icon2={<GiPriceTag />}
-                  onClick={() => sortFunction('price', 'des')}
-                />
+                <div className={dataBase === 'villagers' ? 'hidden' : 'block'}>
+                  <MySortButton
+                    name="Price"
+                    icon={<BsSortNumericDown />}
+                    icon2={<GiPriceTag />}
+                    onClick={() => sortFunction('price', 'asc')}
+                  />
+                  <MySortButton
+                    name="Price"
+                    icon={<BsSortNumericUpAlt />}
+                    icon2={<GiPriceTag />}
+                    onClick={() => sortFunction('price', 'des')}
+                  />
+                </div>
                 <MySortButton
                   name="Name"
                   icon2={<FaUserTag />}
@@ -195,18 +210,28 @@ const CardsDisplayer = (props) => {
                   icon2={<FaUserTag />}
                   onClick={() => sortFunction2('des')}
                 />
-                <MySortButton
-                  name="Rarity"
-                  icon={<BsSortAlphaDown />}
-                  icon2={<GiCutDiamond />}
-                  onClick={() => sortFunction3('asc')}
-                />
-                <MySortButton
-                  name="Rarity"
-                  icon={<BsSortAlphaUpAlt />}
-                  icon2={<GiCutDiamond />}
-                  onClick={() => sortFunction3('des')}
-                />
+                <div
+                  className={
+                    dataBase === 'sea' ||
+                    dataBase === 'villagers' ||
+                    dataBase === 'songs'
+                      ? 'hidden'
+                      : 'block'
+                  }
+                >
+                  <MySortButton
+                    name="Rarity"
+                    icon={<BsSortAlphaDown />}
+                    icon2={<GiCutDiamond />}
+                    onClick={() => sortFunction3('asc')}
+                  />
+                  <MySortButton
+                    name="Rarity"
+                    icon={<BsSortAlphaUpAlt />}
+                    icon2={<GiCutDiamond />}
+                    onClick={() => sortFunction3('des')}
+                  />
+                </div>
               </ul>
             </nav>
           </div>

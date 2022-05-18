@@ -114,12 +114,12 @@ const CommonLayout = ({ children }) => {
               <MyLink
                 name="Villagers"
                 icon={<GiBearFace />}
-                myRoutes={routes.bugs()}
+                myRoutes={routes.villagers()}
               />
               <MyLink
                 name="Songs"
                 icon={<GiLoveSong />}
-                myRoutes={routes.bugs()}
+                myRoutes={routes.songs()}
               />
               <MyLink
                 name="Arts"
@@ -168,13 +168,13 @@ const CommonLayout = ({ children }) => {
                 <MyTinyLink
                   name="Villagers"
                   icon={<GiBearFace />}
-                  myRoutes={routes.bugs()}
+                  myRoutes={routes.villagers()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Songs"
                   icon={<GiLoveSong />}
-                  myRoutes={routes.bugs()}
+                  myRoutes={routes.songs()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
