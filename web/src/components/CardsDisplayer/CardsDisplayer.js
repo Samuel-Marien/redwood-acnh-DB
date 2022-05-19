@@ -61,6 +61,37 @@ const Card = (props) => {
   )
 }
 
+const Card2 = (props) => {
+  const { item } = props
+  return (
+    <div className=" font-inika border p-3 m-2 shadow-lg hover:shadow-none bg-white rounded-xl w-48">
+      <div className="flex justify-between items-center">
+        <p className=" uppercase font-bold text-myBrown-100">
+          {item[0].name['name-EUfr']}
+        </p>
+        <p className="text-xs text-myPink-100">
+          #
+          <span className="text-xs font-bold text-myBrown-100">
+            {item[0]['internal-id']}
+          </span>
+        </p>
+      </div>
+      <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
+        <img src={item[0].image_uri} alt={item[0].name['name-EUfr']} />
+      </div>
+      <div className="flex justify-between ">
+        <p className="w-1/3 flex justify-center px-3 py-1 bg-myYellow-100 text-white  text-xs font-medium rounded-full">
+          {item[0]['version']}
+        </p>
+        <p className="text-xs flex justify-center  px-3 py-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
+          {item[0]['buy-price'] ? item[0]['buy-price'] : 'N/A'} $ /{' '}
+          {item[0]['sell-price']} $
+        </p>
+      </div>
+    </div>
+  )
+}
+
 const MySortButton = (props) => {
   const { name, icon, icon2, onClick } = props
 
@@ -81,7 +112,7 @@ const MySortButton = (props) => {
 const CardsDisplayer = (props) => {
   const { cardsDatas, dataBase } = props
   const [currentPage, setCurrentPage] = useState(1)
-  const pagePostsLimit = 10
+  const pagePostsLimit = 15
   const datasSanityze = []
   const [data, setData] = useState([])
 
@@ -157,7 +188,7 @@ const CardsDisplayer = (props) => {
     setData(result)
   }
 
-  console.log(dataBase)
+  // console.log(dataBase)
 
   return (
     <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-gradient-to-t via-myBrown-200  from-myBrown-200">
@@ -252,28 +283,46 @@ const CardsDisplayer = (props) => {
               rpbItemClassNameActive: 'bg-yellow-500 text-myBrown-100',
               rpbItemClassNameDisable: 'opacity-50 ',
               rpbRootClassName:
-                'custom-root font-inika text-myYellow-100  flex justify-center mb-1',
+                'custom-root font-inika text-myYellow-100 flex justify-center mb-1',
             }}
           />
         ) : null}
       </div>
 
-      <div className="flex flex-row  justify-center flex-wrap">
+      <div className="flex flex-row justify-center flex-wrap">
         {data.length < 1 && datasSanityze
           ? datasSanityze
               .slice(
                 (currentPage - 1) * pagePostsLimit,
                 (currentPage - 1) * pagePostsLimit + pagePostsLimit
               )
-              .map((item) => {
-                return (
-                  <Link
-                    to={routes.details({ id: item.id, dataBase })}
-                    key={item.id}
-                  >
-                    <Card item={item} />
-                  </Link>
-                )
+              .map((item, index) => {
+                if (
+                  dataBase !== 'houseware' &&
+                  dataBase !== 'wallmounted' &&
+                  dataBase !== 'misc'
+                ) {
+                  return (
+                    <Link
+                      to={routes.details({ id: item.id, dataBase })}
+                      key={item.id}
+                    >
+                      <Card item={item} />
+                    </Link>
+                  )
+                } else {
+                  return (
+                    <Link
+                      to={routes.details({
+                        id: item[0]['internal-id'],
+                        dataBase,
+                      })}
+                      key={index}
+                    >
+                      <Card2 item={item} />
+                    </Link>
+                  )
+                }
               })
           : data
               .slice(

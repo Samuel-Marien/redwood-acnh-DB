@@ -12,6 +12,10 @@ const Routes = () => {
         <Route path="/bugs" page={BugsPage} name="bugs" />
         <Route path="/villagers" page={VillagersPage} name="villagers" />
         <Route path="/songs" page={SongsPage} name="songs" />
+        <Route path="/arts" page={ArtsPage} name="arts" />
+        <Route path="/houseware" page={HousewarePage} name="houseware" />
+        <Route path="/papers" page={PapersPage} name="papers" />
+        <Route path="/misc" page={MiscPage} name="misc" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>

@@ -124,19 +124,19 @@ const CommonLayout = ({ children }) => {
               <MyLink
                 name="Arts"
                 icon={<GiPaintBrush />}
-                myRoutes={routes.bugs()}
+                myRoutes={routes.arts()}
               />
               <MyLink
                 name="House"
                 icon={<GiFamilyHouse />}
-                myRoutes={routes.bugs()}
+                myRoutes={routes.houseware()}
               />
               <MyLink
                 name="Paper"
                 icon={<GiStoneWall />}
-                myRoutes={routes.bugs()}
+                myRoutes={routes.papers()}
               />
-              <MyLink name="Misc" icon={<GiCubes />} myRoutes={routes.bugs()} />
+              <MyLink name="Misc" icon={<GiCubes />} myRoutes={routes.misc()} />
             </div>
           </div>
           <div className="lg:flex hidden" items-center>
@@ -180,25 +180,25 @@ const CommonLayout = ({ children }) => {
                 <MyTinyLink
                   name="Arts"
                   icon={<GiPaintBrush />}
-                  myRoutes={routes.bugs()}
+                  myRoutes={routes.arts()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="House"
                   icon={<GiFamilyHouse />}
-                  myRoutes={routes.bugs()}
+                  myRoutes={routes.houseware()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Paper"
                   icon={<GiStoneWall />}
-                  myRoutes={routes.bugs()}
+                  myRoutes={routes.papers()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
                 <MyTinyLink
                   name="Misc"
                   icon={<GiCubes />}
-                  myRoutes={routes.bugs()}
+                  myRoutes={routes.misc()}
                   onClick={() => (show ? setShow(false) : setShow(true))}
                 />
 
@@ -232,15 +232,15 @@ const CommonLayout = ({ children }) => {
               </p>
             </div>
           </Link>
-          <p className="text-myBrown-200 text-sm ml-5 pl-4 border-l border-r pr-4 flex">
+          <p className="text-myBrown-200 text-xs ml-5 pl-4 border-l border-r pr-4 flex">
             Buil with ❤️ /{' '}
             <a href="https://redwoodjs.com/" className="flex">
               <span className="mx-1">RedwoodJs</span>
-              <img src="favicon.png" alt="icon redwood" className="w-5" />
+              <img src="favicon.png" alt="icon redwood" className="w-4" />
             </a>{' '}
             <a href="http://acnhapi.com/" className="flex">
               <span className="mx-1">/ ACNH API</span>
-              <img src="favicon-acnh.png" alt="icon redwood" className="w-5" />
+              <img src="favicon-acnh.png" alt="icon redwood" className="w-4" />
             </a>
           </p>
           <p className="ml-5 text-2xl text-myYellow-100 flex">
