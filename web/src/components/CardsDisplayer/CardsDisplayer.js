@@ -13,6 +13,8 @@ import {
 import { GiPriceTag, GiCutDiamond } from 'react-icons/gi'
 import { HiOutlineHashtag } from 'react-icons/hi'
 import { FaUserTag } from 'react-icons/fa'
+import { SiShadow } from 'react-icons/si'
+import { BsSpeedometer } from 'react-icons/bs'
 
 const Card = (props) => {
   const { item } = props
@@ -61,16 +63,26 @@ const Card = (props) => {
         </p>
       ) : null}
 
-      {item.availability ? (
+      {/* this section for fishs&bugs */}
+      {item.availability.location ? (
         <div className="flex justify-between  text-xs">
           <p className=" capitalize flex justify-center px-1 py-1 bg-myYellow-100 text-white font-medium rounded-full">
             {item.availability.location
               ? locationCut(item.availability.location)
-              : 'N/A'}
+              : null}
           </p>
-
           <p className=" flex justify-center p-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
-            {item.availability.rarity ? item.availability.rarity : 'N/A'}
+            {item.availability.rarity ? item.availability.rarity : null}
+          </p>
+        </div>
+      ) : null}
+      {item.shadow && !item.availability.location ? (
+        <div className="flex justify-between  text-xs">
+          <p className=" capitalize flex justify-center px-1 py-1 bg-myYellow-100 text-white font-medium rounded-full">
+            {item.shadow}
+          </p>
+          <p className=" flex justify-center p-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
+            {item.speed ? item.speed : null}
           </p>
         </div>
       ) : null}
@@ -130,7 +142,7 @@ const CardsDisplayer = (props) => {
   const { cardsDatas, dataBase } = props
   const [currentPage, setCurrentPage] = useState(1)
   const [data, setData] = useState([])
-  const pagePostsLimit = 15
+  const pagePostsLimit = 12
   const datasSanityze = []
 
   try {
@@ -155,7 +167,7 @@ const CardsDisplayer = (props) => {
         .reverse()
       setData(sorted)
     } else {
-      console.log('Some error with sorting methods!')
+      console.log('Some error(s) with sorting methods!')
     }
   }
 
@@ -185,6 +197,29 @@ const CardsDisplayer = (props) => {
   const sortFunction3 = (level) => {
     let mapped = datasSanityze.map(function (e, i) {
       return { index: i, item: e, value: e.availability.rarity }
+    })
+
+    mapped.sort(function (a, b) {
+      return a.value.localeCompare(b.value)
+    })
+    let result
+    if (level === 'asc') {
+      result = mapped.map(function (e) {
+        return datasSanityze[e.index]
+      })
+    } else {
+      result = mapped
+        .map(function (e) {
+          return datasSanityze[e.index]
+        })
+        .reverse()
+    }
+    setData(result)
+  }
+
+  const sortFunctionShadow = (level, type) => {
+    let mapped = datasSanityze.map(function (e, i) {
+      return { index: i, item: e, value: e[type] }
     })
 
     mapped.sort(function (a, b) {
@@ -278,6 +313,32 @@ const CardsDisplayer = (props) => {
                     icon={<BsSortAlphaUpAlt />}
                     icon2={<GiCutDiamond />}
                     onClick={() => sortFunction3('des')}
+                  />
+                </div>
+                <div className={dataBase === 'sea' ? 'block' : 'hidden'}>
+                  <MySortButton
+                    name="shadow"
+                    icon={<BsSortAlphaDown />}
+                    icon2={<SiShadow />}
+                    onClick={() => sortFunctionShadow('asc', 'shadow')}
+                  />
+                  <MySortButton
+                    name="shadow"
+                    icon={<BsSortAlphaUpAlt />}
+                    icon2={<SiShadow />}
+                    onClick={() => sortFunctionShadow('des', 'shadow')}
+                  />
+                  <MySortButton
+                    name="speed"
+                    icon={<BsSortAlphaDown />}
+                    icon2={<BsSpeedometer />}
+                    onClick={() => sortFunctionShadow('asc', 'speed')}
+                  />
+                  <MySortButton
+                    name="speed"
+                    icon={<BsSortAlphaUpAlt />}
+                    icon2={<BsSpeedometer />}
+                    onClick={() => sortFunctionShadow('des', 'speed')}
                   />
                 </div>
               </ul>
