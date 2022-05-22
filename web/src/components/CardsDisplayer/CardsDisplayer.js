@@ -9,12 +9,12 @@ import {
   BsSortNumericUpAlt,
   BsSortAlphaDown,
   BsSortAlphaUpAlt,
+  BsSpeedometer,
 } from 'react-icons/bs'
 import { GiPriceTag, GiCutDiamond } from 'react-icons/gi'
 import { HiOutlineHashtag } from 'react-icons/hi'
 import { FaUserTag } from 'react-icons/fa'
 import { SiShadow } from 'react-icons/si'
-import { BsSpeedometer } from 'react-icons/bs'
 
 const Card = (props) => {
   const { item } = props
@@ -64,15 +64,19 @@ const Card = (props) => {
       ) : null}
 
       {/* this section for fishs&bugs */}
-      {item.availability.location ? (
-        <div className="flex justify-between  text-xs">
-          <p className=" capitalize flex justify-center px-1 py-1 bg-myYellow-100 text-white font-medium rounded-full">
-            {item.availability.location
-              ? locationCut(item.availability.location)
-              : null}
+      {item.availability ? (
+        <div className="flex justify-between text-xs">
+          <p className="capitalize flex justify-center  bg-myYellow-100 text-white font-medium rounded-full">
+            {item.availability.location ? (
+              <span className="p-1">
+                {locationCut(item.availability.location)}
+              </span>
+            ) : null}
           </p>
-          <p className=" flex justify-center p-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
-            {item.availability.rarity ? item.availability.rarity : null}
+          <p className=" flex justify-center bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
+            {item.availability.rarity ? (
+              <span className="p-1">{item.availability.rarity}</span>
+            ) : null}
           </p>
         </div>
       ) : null}
@@ -86,6 +90,8 @@ const Card = (props) => {
           </p>
         </div>
       ) : null}
+
+      {item.birthday ? <p className="">{item.birthday}</p> : null}
     </div>
   )
 }
@@ -385,7 +391,7 @@ const CardsDisplayer = (props) => {
                       to={routes.details({ id: item.id, dataBase })}
                       key={item.id}
                     >
-                      <Card item={item} />
+                      <Card item={item} myDataBase={dataBase} />
                     </Link>
                   )
                 } else {
