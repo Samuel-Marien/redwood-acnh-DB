@@ -16,11 +16,30 @@ import { FaUserTag } from 'react-icons/fa'
 
 const Card = (props) => {
   const { item } = props
+
+  // locationCut: cut if it's multiple's words description
+  const locationCut = (locationWord) => {
+    if (locationWord.length > 15) {
+      return locationWord.slice(0, 8) + ' ...'
+    } else if (locationWord.indexOf('O') === 0) {
+      return locationWord.slice(3)
+    } else {
+      if (locationWord.indexOf(' ') !== -1) {
+        const i = locationWord.indexOf(' ')
+        return locationWord.slice(0, i)
+      } else {
+        return locationWord
+      }
+    }
+  }
+
   return (
     <div className=" font-inika border p-3 m-2 shadow-lg hover:shadow-none bg-white rounded-xl w-48">
       <div className="flex justify-between items-center">
         <p className=" uppercase font-bold text-myBrown-100">
-          {item.name['name-EUfr']}
+          {item.id === 53
+            ? item.name['name-EUfr'].slice(0, 10) + ' ...'
+            : item.name['name-EUfr']}
         </p>
         <p className="text-sm text-myPink-100">
           #<span className="text-lg font-bold text-myBrown-100">{item.id}</span>
@@ -43,16 +62,14 @@ const Card = (props) => {
       ) : null}
 
       {item.availability ? (
-        <div className="flex justify-between">
-          <p className="w-1/3 flex justify-center px-3 py-1 bg-myYellow-100 text-white text-sm font-medium rounded-full">
-            {/* {item.availability.location.slice(0, 5) === 'River'
-            ? item.availability.location.slice(0, 5)
-            : item.availability.location.slice(0, 3) === 'Sea'
-            ? item.availability.location.slice(0, 3)
-            : item.availability.location} */}
-            {item.availability.location ? item.availability.location : 'N/A'}
+        <div className="flex justify-between  text-xs">
+          <p className=" capitalize flex justify-center px-1 py-1 bg-myYellow-100 text-white font-medium rounded-full">
+            {item.availability.location
+              ? locationCut(item.availability.location)
+              : 'N/A'}
           </p>
-          <p className=" flex justify-center  px-3 py-1 bg-myBrown-100 text-myYellow-100 text-sm font-medium rounded-full">
+
+          <p className=" flex justify-center p-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
             {item.availability.rarity ? item.availability.rarity : 'N/A'}
           </p>
         </div>
@@ -112,9 +129,9 @@ const MySortButton = (props) => {
 const CardsDisplayer = (props) => {
   const { cardsDatas, dataBase } = props
   const [currentPage, setCurrentPage] = useState(1)
+  const [data, setData] = useState([])
   const pagePostsLimit = 15
   const datasSanityze = []
-  const [data, setData] = useState([])
 
   try {
     for (let item of Object.getOwnPropertyNames(cardsDatas)) {
