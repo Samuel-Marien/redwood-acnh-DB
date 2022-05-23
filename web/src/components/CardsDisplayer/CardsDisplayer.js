@@ -11,7 +11,7 @@ import {
   BsSortAlphaUpAlt,
   BsSpeedometer,
 } from 'react-icons/bs'
-import { GiPriceTag, GiCutDiamond } from 'react-icons/gi'
+import { GiPriceTag, GiCutDiamond, GiAura, GiFrogFoot } from 'react-icons/gi'
 import { HiOutlineHashtag } from 'react-icons/hi'
 import { FaUserTag } from 'react-icons/fa'
 import { SiShadow } from 'react-icons/si'
@@ -36,19 +36,24 @@ const Card = (props) => {
   }
 
   return (
-    <div className=" font-inika border p-3 m-2 shadow-lg hover:shadow-none bg-white rounded-xl w-48">
-      <div className="flex justify-between items-center">
+    <div className="font-inika p-3 m-2 shadow-lg hover:shadow-none bg-white rounded-xl w-48">
+      <div className="flex justify-between items-center ">
         <p className=" uppercase font-bold text-myBrown-100">
-          {item.id === 53
-            ? item.name['name-EUfr'].slice(0, 10) + ' ...'
-            : item.name['name-EUfr']}
+          <span>
+            {item.id === 53
+              ? item.name['name-EUfr'].slice(0, 10) + ' ...'
+              : item.name['name-EUfr']}
+          </span>
         </p>
         <p className="text-sm text-myPink-100">
           #<span className="text-lg font-bold text-myBrown-100">{item.id}</span>
         </p>
       </div>
       {item.icon_uri ? (
-        <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
+        <div
+          className="flex justify-center rounded-full m-4 bg-myBrown-200"
+          style={{ border: `4px solid ${item['bubble-color']}` }}
+        >
           <img src={item.icon_uri} alt={item.name['name-EUfr']} />
         </div>
       ) : (
@@ -85,13 +90,25 @@ const Card = (props) => {
           <p className=" capitalize flex justify-center px-1 py-1 bg-myYellow-100 text-white font-medium rounded-full">
             {item.shadow}
           </p>
-          <p className=" flex justify-center p-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
+          <p className="capitalize flex justify-center p-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
             {item.speed ? item.speed : null}
           </p>
         </div>
       ) : null}
 
-      {item.birthday ? <p className="">{item.birthday}</p> : null}
+      {/* this section for villagers */}
+      <div className="flex justify-between  text-xs">
+        {item.species ? (
+          <p className="capitalize flex justify-center px-1 py-1 bg-myYellow-100 text-white font-medium rounded-full">
+            {item.species}
+          </p>
+        ) : null}
+        {item.personality ? (
+          <p className="capitalize flex justify-center p-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
+            {item.personality}
+          </p>
+        ) : null}
+      </div>
     </div>
   )
 }
@@ -321,6 +338,7 @@ const CardsDisplayer = (props) => {
                     onClick={() => sortFunction3('des')}
                   />
                 </div>
+                {/* sort buttons for sea creatures */}
                 <div className={dataBase === 'sea' ? 'block' : 'hidden'}>
                   <MySortButton
                     name="shadow"
@@ -345,6 +363,33 @@ const CardsDisplayer = (props) => {
                     icon={<BsSortAlphaUpAlt />}
                     icon2={<BsSpeedometer />}
                     onClick={() => sortFunctionShadow('des', 'speed')}
+                  />
+                </div>
+                {/* this section for villagers */}
+                <div className={dataBase === 'villagers' ? 'block' : 'hidden'}>
+                  <MySortButton
+                    name="species"
+                    icon={<BsSortAlphaDown />}
+                    icon2={<GiFrogFoot />}
+                    onClick={() => sortFunctionShadow('asc', 'species')}
+                  />
+                  <MySortButton
+                    name="species"
+                    icon={<BsSortAlphaUpAlt />}
+                    icon2={<GiFrogFoot />}
+                    onClick={() => sortFunctionShadow('des', 'species')}
+                  />
+                  <MySortButton
+                    name="personality"
+                    icon={<BsSortAlphaDown />}
+                    icon2={<GiAura />}
+                    onClick={() => sortFunctionShadow('asc', 'personality')}
+                  />
+                  <MySortButton
+                    name="personality"
+                    icon={<BsSortAlphaUpAlt />}
+                    icon2={<GiAura />}
+                    onClick={() => sortFunctionShadow('des', 'personality')}
                   />
                 </div>
               </ul>
