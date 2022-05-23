@@ -233,7 +233,7 @@ const CommonLayout = ({ children }) => {
             </div>
           </Link>
           <p className="text-myBrown-200 text-xs ml-5 pl-4 border-l border-r pr-4 flex">
-            Buil with ❤️ /{' '}
+            Build with ❤️ /{' '}
             <a href="https://redwoodjs.com/" className="flex">
               <span className="mx-1">RedwoodJs</span>
               <img src="favicon.png" alt="icon redwood" className="w-4" />

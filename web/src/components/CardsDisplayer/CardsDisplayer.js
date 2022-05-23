@@ -11,10 +11,18 @@ import {
   BsSortAlphaUpAlt,
   BsSpeedometer,
 } from 'react-icons/bs'
-import { GiPriceTag, GiCutDiamond, GiAura, GiFrogFoot } from 'react-icons/gi'
+import {
+  GiPriceTag,
+  GiCutDiamond,
+  GiAura,
+  GiFrogFoot,
+  GiPayMoney,
+  GiReceiveMoney,
+} from 'react-icons/gi'
 import { HiOutlineHashtag } from 'react-icons/hi'
 import { FaUserTag } from 'react-icons/fa'
 import { SiShadow } from 'react-icons/si'
+import { MdMoneyOff } from 'react-icons/md'
 
 const Card = (props) => {
   const { item } = props
@@ -52,7 +60,13 @@ const Card = (props) => {
       {item.icon_uri ? (
         <div
           className="flex justify-center rounded-full m-4 bg-myBrown-200"
-          style={{ border: `4px solid ${item['bubble-color']}` }}
+          style={{
+            border: `${
+              item['bubble-color']
+                ? `6px solid ${item['bubble-color']}`
+                : `6px solid pink`
+            }`,
+          }}
         >
           <img src={item.icon_uri} alt={item.name['name-EUfr']} />
         </div>
@@ -107,6 +121,26 @@ const Card = (props) => {
           <p className="capitalize flex justify-center p-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
             {item.personality}
           </p>
+        ) : null}
+      </div>
+      {/* this section for songs */}
+      <div className="flex justify-center w-full text-myYellow-100">
+        {item['buy-price'] ? (
+          <div className="text-sm shadow rounded-2xl flex p-1">
+            <p className="flex mr-4">
+              <span className="text-xl mr-1 text-myBrown-100">
+                <GiPayMoney />
+              </span>
+              {item['buy-price']}
+            </p>
+            <p className="flex">
+              {' '}
+              <span className="text-xl text-myBrown-100">
+                <GiReceiveMoney />
+              </span>
+              {item['sell-price']}
+            </p>
+          </div>
         ) : null}
       </div>
     </div>
@@ -274,7 +308,7 @@ const CardsDisplayer = (props) => {
               Sort
             </button>
             <nav
-              className=" border-2 bg-white invisible border-myBrown-100 rounded w-36 absolute left-0 top-full
+              className=" border-2 bg-white invisible border-myBrown-100 rounded w-48 absolute left-0 top-full
           transition-all opacity-0 group-focus-within:visible group-focus-within:opacity-90 group-focus-within:translate-y-1"
             >
               <ul className="py-1">
@@ -290,7 +324,13 @@ const CardsDisplayer = (props) => {
                   icon={<BsSortNumericUpAlt />}
                   onClick={() => sortFunction('id', 'des')}
                 />
-                <div className={dataBase === 'villagers' ? 'hidden' : 'block'}>
+                <div
+                  className={
+                    dataBase === 'villagers' || dataBase === 'songs'
+                      ? 'hidden'
+                      : 'block'
+                  }
+                >
                   <MySortButton
                     name="Price"
                     icon={<BsSortNumericDown />}
@@ -390,6 +430,22 @@ const CardsDisplayer = (props) => {
                     icon={<BsSortAlphaUpAlt />}
                     icon2={<GiAura />}
                     onClick={() => sortFunctionShadow('des', 'personality')}
+                  />
+                </div>
+                {/* this section for songs */}
+                <div className={dataBase === 'songs' ? 'block' : 'hidden'}>
+                  {' '}
+                  <MySortButton
+                    name="Unorderable"
+                    icon={<BsSortNumericDown />}
+                    icon2={<MdMoneyOff />}
+                    onClick={() => sortFunction('buy-price', 'asc')}
+                  />
+                  <MySortButton
+                    name="Orderable"
+                    icon={<BsSortNumericUpAlt />}
+                    icon2={<GiPayMoney />}
+                    onClick={() => sortFunction('buy-price', 'des')}
                   />
                 </div>
               </ul>
