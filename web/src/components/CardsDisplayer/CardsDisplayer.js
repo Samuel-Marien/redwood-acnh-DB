@@ -326,7 +326,9 @@ const CardsDisplayer = (props) => {
                 />
                 <div
                   className={
-                    dataBase === 'villagers' || dataBase === 'songs'
+                    dataBase === 'villagers' ||
+                    dataBase === 'songs' ||
+                    dataBase === 'art'
                       ? 'hidden'
                       : 'block'
                   }
@@ -360,7 +362,8 @@ const CardsDisplayer = (props) => {
                   className={
                     dataBase === 'sea' ||
                     dataBase === 'villagers' ||
-                    dataBase === 'songs'
+                    dataBase === 'songs' ||
+                    dataBase === 'art'
                       ? 'hidden'
                       : 'block'
                   }
