@@ -165,13 +165,32 @@ const Card2 = (props) => {
       <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
         <img src={item[0].image_uri} alt={item[0].name['name-EUfr']} />
       </div>
-      <div className="flex justify-between ">
-        <p className="w-1/3 flex justify-center px-3 py-1 bg-myYellow-100 text-white  text-xs font-medium rounded-full">
+
+      <div className="flex justify-center w-full text-myYellow-100">
+        {item[0]['buy-price'] || item[0]['sell-price'] ? (
+          <div className="text-sm shadow rounded-2xl flex p-1">
+            <p className="flex mr-4">
+              <span className="text-xl mr-1 text-myBrown-100">
+                <GiPayMoney />
+              </span>
+              {item[0]['buy-price'] ? item[0]['buy-price'] : 'N/A'}
+            </p>
+            <p className="flex">
+              {' '}
+              <span className="text-xl text-myBrown-100">
+                <GiReceiveMoney />
+              </span>
+              {item[0]['sell-price'] ? item[0]['sell-price'] : 'N/A'}
+            </p>
+          </div>
+        ) : null}
+      </div>
+      <div className="flex justify-between w-full">
+        <p className="flex justify-center mt-3 px-3 py-1 bg-myYellow-100 text-white  text-xs font-medium rounded-full">
           {item[0]['version']}
         </p>
-        <p className="text-xs flex justify-center  px-3 py-1 bg-myBrown-100 text-myYellow-100 font-medium rounded-full">
-          {item[0]['buy-price'] ? item[0]['buy-price'] : 'N/A'} $ /{' '}
-          {item[0]['sell-price']} $
+        <p className="flex justify-between mt-3 px-3 py-1 bg-myYellow-100 text-white  text-xs font-medium rounded-full">
+          {item[0]['size']}
         </p>
       </div>
     </div>
@@ -312,18 +331,28 @@ const CardsDisplayer = (props) => {
           transition-all opacity-0 group-focus-within:visible group-focus-within:opacity-90 group-focus-within:translate-y-1"
             >
               <ul className="py-1">
-                <MySortButton
-                  name="Id"
-                  icon2={<HiOutlineHashtag />}
-                  icon={<BsSortNumericDown />}
-                  onClick={() => sortFunction('id', 'asc')}
-                />
-                <MySortButton
-                  name="Id"
-                  icon2={<HiOutlineHashtag />}
-                  icon={<BsSortNumericUpAlt />}
-                  onClick={() => sortFunction('id', 'des')}
-                />
+                <div
+                  className={
+                    dataBase === 'houseware' ||
+                    dataBase === 'wallmounted' ||
+                    dataBase === 'misc'
+                      ? 'hidden'
+                      : 'block'
+                  }
+                >
+                  <MySortButton
+                    name="Id"
+                    icon2={<HiOutlineHashtag />}
+                    icon={<BsSortNumericDown />}
+                    onClick={() => sortFunction('id', 'asc')}
+                  />
+                  <MySortButton
+                    name="Id"
+                    icon2={<HiOutlineHashtag />}
+                    icon={<BsSortNumericUpAlt />}
+                    onClick={() => sortFunction('id', 'des')}
+                  />
+                </div>
                 <div
                   className={
                     dataBase === 'villagers' ||
