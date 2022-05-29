@@ -78,7 +78,7 @@ const CommonLayout = ({ children }) => {
           <div className="flex justify-between w-full lg:w-auto">
             <Link to={routes.home()}>
               <div className="flex items-center text-myBrown-200 mr-6">
-                <div className="border-2 border-myBrown-200 shadow-lg p-1 rounded-xl bg-myYellow-200">
+                <div className="border-2 border-myGreen-200 shadow-lg p-1 rounded-xl bg-myYellow-200">
                   <GiZigzagLeaf size={40} color={'#786951'} />
                 </div>
                 <p className="font-inika text-4xl ml-2  subpixel-antialiased font-black tracking-tight">
