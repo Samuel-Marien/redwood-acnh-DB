@@ -18,11 +18,13 @@ import {
   GiFrogFoot,
   GiPayMoney,
   GiReceiveMoney,
+  GiResize,
 } from 'react-icons/gi'
 import { HiOutlineHashtag } from 'react-icons/hi'
 import { FaUserTag } from 'react-icons/fa'
 import { SiShadow } from 'react-icons/si'
 import { MdMoneyOff } from 'react-icons/md'
+import { VscVersions } from 'react-icons/vsc'
 
 const Card = (props) => {
   const { item } = props
@@ -316,6 +318,36 @@ const CardsDisplayer = (props) => {
     setData(result)
   }
 
+  const sortFunctionItems = (type, level) => {
+    if (level === 'asc') {
+      const sorted = datasSanityze.sort(function (a, b) {
+        if (type === 'version') {
+          return a[0][type].slice(2, 3) - b[0][type].slice(2, 3)
+        } else if (type === 'size') {
+          return a[0][type].slice(0, 1) - b[0][type].slice(0, 1)
+        } else {
+          return a[0][type] - b[0][type]
+        }
+      })
+      setData(sorted)
+    } else if (level === 'des') {
+      const sorted = datasSanityze
+        .sort(function (a, b) {
+          if (type === 'version') {
+            return a[0][type].slice(2, 3) - b[0][type].slice(2, 3)
+          } else if (type === 'size') {
+            return a[0][type].slice(0, 1) - b[0][type].slice(0, 1)
+          } else {
+            return a[0][type] - b[0][type]
+          }
+        })
+        .reverse()
+      setData(sorted)
+    } else {
+      console.log('Some error(s) with sorting methods!')
+    }
+  }
+
   // console.log(dataBase)
 
   return (
@@ -357,7 +389,10 @@ const CardsDisplayer = (props) => {
                   className={
                     dataBase === 'villagers' ||
                     dataBase === 'songs' ||
-                    dataBase === 'art'
+                    dataBase === 'art' ||
+                    dataBase === 'houseware' ||
+                    dataBase === 'wallmounted' ||
+                    dataBase === 'misc'
                       ? 'hidden'
                       : 'block'
                   }
@@ -375,24 +410,37 @@ const CardsDisplayer = (props) => {
                     onClick={() => sortFunction('price', 'des')}
                   />
                 </div>
-                <MySortButton
-                  name="Name"
-                  icon2={<FaUserTag />}
-                  icon={<BsSortAlphaDown />}
-                  onClick={() => sortFunction2('asc')}
-                />
-                <MySortButton
-                  name="Name"
-                  icon={<BsSortAlphaUpAlt />}
-                  icon2={<FaUserTag />}
-                  onClick={() => sortFunction2('des')}
-                />
+                <div
+                  className={
+                    dataBase === 'houseware' ||
+                    dataBase === 'wallmounted' ||
+                    dataBase === 'misc'
+                      ? 'hidden'
+                      : 'block'
+                  }
+                >
+                  <MySortButton
+                    name="Name"
+                    icon2={<FaUserTag />}
+                    icon={<BsSortAlphaDown />}
+                    onClick={() => sortFunction2('asc')}
+                  />
+                  <MySortButton
+                    name="Name"
+                    icon={<BsSortAlphaUpAlt />}
+                    icon2={<FaUserTag />}
+                    onClick={() => sortFunction2('des')}
+                  />
+                </div>
                 <div
                   className={
                     dataBase === 'sea' ||
                     dataBase === 'villagers' ||
                     dataBase === 'songs' ||
-                    dataBase === 'art'
+                    dataBase === 'art' ||
+                    dataBase === 'houseware' ||
+                    dataBase === 'wallmounted' ||
+                    dataBase === 'misc'
                       ? 'hidden'
                       : 'block'
                   }
@@ -480,6 +528,66 @@ const CardsDisplayer = (props) => {
                     onClick={() => sortFunction('buy-price', 'des')}
                   />
                 </div>
+                {/* this section for house&co  */}
+                <div
+                  className={
+                    dataBase === 'houseware' ||
+                    dataBase === 'wallmounted' ||
+                    dataBase === 'misc'
+                      ? 'block'
+                      : 'hidden'
+                  }
+                >
+                  <MySortButton
+                    name="Buy price"
+                    icon={<BsSortNumericDown />}
+                    icon2={<GiPayMoney />}
+                    onClick={() => sortFunctionItems('buy-price', 'asc')}
+                  />
+                  <MySortButton
+                    name="Buy price"
+                    icon={<BsSortNumericUpAlt />}
+                    icon2={<GiPayMoney />}
+                    onClick={() => sortFunctionItems('buy-price', 'des')}
+                  />
+                  <MySortButton
+                    name="Sell price"
+                    icon={<BsSortNumericDown />}
+                    icon2={<GiReceiveMoney />}
+                    onClick={() => sortFunctionItems('sell-price', 'asc')}
+                  />
+                  <MySortButton
+                    name="Sell price"
+                    icon={<BsSortNumericUpAlt />}
+                    icon2={<GiReceiveMoney />}
+                    onClick={() => sortFunctionItems('sell-price', 'des')}
+                  />
+
+                  <MySortButton
+                    name="Version"
+                    icon={<BsSortNumericDown />}
+                    icon2={<VscVersions />}
+                    onClick={() => sortFunctionItems('version', 'asc')}
+                  />
+                  <MySortButton
+                    name="Version"
+                    icon={<BsSortNumericUpAlt />}
+                    icon2={<VscVersions />}
+                    onClick={() => sortFunctionItems('version', 'des')}
+                  />
+                  <MySortButton
+                    name="Size"
+                    icon={<BsSortNumericDown />}
+                    icon2={<GiResize />}
+                    onClick={() => sortFunctionItems('size', 'asc')}
+                  />
+                  <MySortButton
+                    name="Size"
+                    icon={<BsSortNumericUpAlt />}
+                    icon2={<GiResize />}
+                    onClick={() => sortFunctionItems('size', 'des')}
+                  />
+                </div>
               </ul>
             </nav>
           </div>
@@ -546,15 +654,33 @@ const CardsDisplayer = (props) => {
                 (currentPage - 1) * pagePostsLimit,
                 (currentPage - 1) * pagePostsLimit + pagePostsLimit
               )
-              .map((item) => {
-                return (
-                  <Link
-                    to={routes.details({ id: item.id, dataBase })}
-                    key={item.id}
-                  >
-                    <Card item={item} />
-                  </Link>
-                )
+              .map((item, index) => {
+                if (
+                  dataBase !== 'houseware' &&
+                  dataBase !== 'wallmounted' &&
+                  dataBase !== 'misc'
+                ) {
+                  return (
+                    <Link
+                      to={routes.details({ id: item.id, dataBase })}
+                      key={item.id}
+                    >
+                      <Card item={item} myDataBase={dataBase} />
+                    </Link>
+                  )
+                } else {
+                  return (
+                    <Link
+                      to={routes.details({
+                        id: item[0]['internal-id'],
+                        dataBase,
+                      })}
+                      key={index}
+                    >
+                      <Card2 item={item} />
+                    </Link>
+                  )
+                }
               })}
       </div>
       <div className="py-5 flex items-center justify-center">
