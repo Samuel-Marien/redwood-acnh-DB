@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, routes } from '@redwoodjs/router'
+import { useAuth } from '@redwoodjs/auth'
 import {
   RiLoginCircleFill,
   RiSunFill,
@@ -56,7 +57,7 @@ const LoginBlock = () => {
       <MyLink
         name="Login"
         icon={<RiLoginCircleFill />}
-        myRoutes={routes.bugs()}
+        myRoutes={routes.login()}
       />
       <div className="flex flex-col">
         <span className="mb-2 text-myGreen-100 hover:text-myGreen-200 cursor-pointer">
@@ -83,6 +84,7 @@ const MyTinyLink = (props) => {
 }
 
 const CommonLayout = ({ children }) => {
+  const { isAuthenticated, currentUser, logOut } = useAuth()
   const [show, setShow] = useState(false)
 
   return (
@@ -153,8 +155,16 @@ const CommonLayout = ({ children }) => {
               <MyLink name="Misc" icon={<GiCubes />} myRoutes={routes.misc()} />
             </div>
           </div>
-          <div className="lg:flex hidden" items-center>
+          <div className="lg:flex hidden">
             <LoginBlock />
+            {isAuthenticated ? (
+              <div>
+                <span>Logged in as {currentUser.email}</span>{' '}
+                <button type="button" onClick={logOut}>
+                  Logout
+                </button>
+              </div>
+            ) : null}
           </div>
         </nav>
         <div className="lg:hidden">
