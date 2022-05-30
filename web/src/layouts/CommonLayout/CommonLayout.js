@@ -233,7 +233,7 @@ const CommonLayout = ({ children }) => {
           ) : null}
         </div>
       </header>
-      <main>{children}</main>
+      <main className="">{children}</main>
       <div className=" bg-myBrown-100 w-full py-4 flex justify-center">
         <div className="flex items-center">
           <Link to={routes.home()}>
