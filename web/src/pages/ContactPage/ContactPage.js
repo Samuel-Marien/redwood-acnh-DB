@@ -1,5 +1,6 @@
-import { MetaTags } from '@redwoodjs/web'
+import { MetaTags, useMutation } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
+import { toast, Toaster } from '@redwoodjs/web/toast'
 import {
   Form,
   TextField,
@@ -7,16 +8,33 @@ import {
   FieldError,
   Submit,
   Label,
+  useForm,
 } from '@redwoodjs/forms'
 import { BiHomeCircle } from 'react-icons/bi'
 
+const CREATE_CONTACT = gql`
+  mutation CreateContactMutation($input: CreateContactInput!) {
+    createContact(input: $input) {
+      id
+    }
+  }
+`
+
 const ContactPage = () => {
+  const formMethods = useForm()
+  const [create, { loading }] = useMutation(CREATE_CONTACT, {
+    onCompleted: () => {
+      toast.success(`Thank you for your submission!`)
+      formMethods.reset()
+    },
+  })
   const onSubmit = (data) => {
-    console.log(data)
+    create({ variables: { input: data } })
   }
   return (
     <>
       <MetaTags title="Contact" description="Contact page" />
+      <Toaster />
       <div className="flex justify-end mr-20 mt-2 text-myBrown-100 underline">
         <Link to={routes.home()} className="flex items-center">
           <span className="mr-1">
@@ -36,6 +54,7 @@ const ContactPage = () => {
             Contact
           </p>
           <Form
+            formMethods={formMethods}
             onSubmit={onSubmit}
             config={{ mode: 'onBlur' }}
             className="flex flex-col shadow-inner px-7 py-5 rounded-3xl bg-myBrown-200"
@@ -86,6 +105,7 @@ const ContactPage = () => {
             />
             <FieldError name="message" className="text-red-700" />
             <Submit
+              disabled={loading}
               className="border rounded-2xl p-2 font-inika uppercase
             font-extrabold w-1/3 mx-auto bg-myGreen-200 text-myBrown-200 hover:bg-myBrown-300 hover:text-myBrown-100 my-2 md:my-5 shadow"
             >
