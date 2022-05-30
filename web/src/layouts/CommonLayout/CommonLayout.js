@@ -49,9 +49,9 @@ const LoginBlock = () => {
       <MyLink name="Blog" icon={<GiSecretBook />} myRoutes={routes.blog()} />
       <MyLink name="DataBase" icon={<FaDatabase />} myRoutes={routes.bugs()} />
       <MyLink
-        name="Message"
+        name="Contact"
         icon={<FaEnvelopeOpenText />}
-        myRoutes={routes.blog()}
+        myRoutes={routes.contact()}
       />
       <MyLink
         name="Login"
