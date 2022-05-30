@@ -18,8 +18,15 @@ import {
   GiCubes,
   GiStoneWall,
   GiZigzagLeaf,
+  GiSecretBook,
 } from 'react-icons/gi'
-import { FaGithubSquare, FaTwitterSquare, FaLinkedin } from 'react-icons/fa'
+import {
+  FaGithubSquare,
+  FaTwitterSquare,
+  FaLinkedin,
+  FaEnvelopeOpenText,
+  FaDatabase,
+} from 'react-icons/fa'
 
 const MyLink = (props) => {
   const { myRoutes, icon, name } = props
@@ -39,6 +46,13 @@ const MyLink = (props) => {
 const LoginBlock = () => {
   return (
     <>
+      <MyLink name="Blog" icon={<GiSecretBook />} myRoutes={routes.blog()} />
+      <MyLink name="DataBase" icon={<FaDatabase />} myRoutes={routes.bugs()} />
+      <MyLink
+        name="Message"
+        icon={<FaEnvelopeOpenText />}
+        myRoutes={routes.blog()}
+      />
       <MyLink
         name="Login"
         icon={<RiLoginCircleFill />}
