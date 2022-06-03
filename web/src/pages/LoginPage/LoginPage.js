@@ -10,7 +10,6 @@ import {
 } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import { MetaTags } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useEffect } from 'react'
 
 const LoginPage = () => {
@@ -18,7 +17,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.home())
+      navigate(routes.fishsPage())
     }
   }, [isAuthenticated])
 
@@ -28,15 +27,7 @@ const LoginPage = () => {
   }, [])
 
   const onSubmit = async (data) => {
-    const response = await logIn({ ...data })
-
-    if (response.message) {
-      toast(response.message)
-    } else if (response.error) {
-      toast.error(response.error)
-    } else {
-      toast.success('Welcome back!')
-    }
+    await logIn({ ...data })
   }
 
   return (
@@ -44,7 +35,6 @@ const LoginPage = () => {
       <MetaTags title="Login" />
 
       <main className="rw-main">
-        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="rw-scaffold rw-login-container">
           <div className="rw-segment">
             <header className="rw-segment-header">
@@ -59,7 +49,7 @@ const LoginPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Username
+                    Email
                   </Label>
                   <TextField
                     name="username"
@@ -69,7 +59,7 @@ const LoginPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: 'Username is required',
+                        message: 'Email is required',
                       },
                     }}
                   />
