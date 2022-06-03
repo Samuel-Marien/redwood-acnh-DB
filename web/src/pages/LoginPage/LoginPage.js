@@ -17,7 +17,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.fishsPage())
+      navigate(routes.home())
     }
   }, [isAuthenticated])
 

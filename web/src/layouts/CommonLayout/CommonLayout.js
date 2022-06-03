@@ -3,6 +3,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 import {
   RiLoginCircleFill,
+  RiHome7Line,
   // RiSunFill,
   // RiMoonFill,
   RiLogoutCircleRLine,
@@ -55,7 +56,12 @@ const NavBlock = () => {
         myRoutes={routes.bugs()}
       />
       <MyNavBlockLink
-        name="Contact"
+        name="My Island"
+        icon={<RiHome7Line />}
+        myRoutes={routes.login()}
+      />
+      <MyNavBlockLink
+        name=""
         icon={<SiTinyletter />}
         myRoutes={routes.contact()}
       />
@@ -140,7 +146,7 @@ const CommonLayout = ({ children }) => {
             {isAuthenticated ? (
               <MyNavBlockLink
                 onClick={logOut}
-                name="Logout"
+                name=""
                 icon={<RiLogoutCircleRLine />}
                 myRoutes={routes.home()}
               />
@@ -166,11 +172,16 @@ const CommonLayout = ({ children }) => {
                     myRoutes={routes.blog()}
                     onClick={() => (show ? setShow(false) : setShow(true))}
                   />
-
                   <MyTinyLink
                     name="Contact"
                     icon={<SiTinyletter />}
                     myRoutes={routes.contact()}
+                    onClick={() => (show ? setShow(false) : setShow(true))}
+                  />
+                  <MyTinyLink
+                    name="My island"
+                    icon={<RiHome7Line />}
+                    myRoutes={routes.login()}
                     onClick={() => (show ? setShow(false) : setShow(true))}
                   />
 
