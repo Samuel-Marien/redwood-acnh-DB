@@ -13,7 +13,7 @@ const PapersPage = () => {
   const myArray = []
 
   useEffect(() => {
-    fetch(`http://acnhapi.com/v1/wallmounted/`)
+    fetch(`https://acnhapi.com/v1/wallmounted/`)
       .then((response) => response.json())
       .then((json) => setStateAll(json))
   }, [])

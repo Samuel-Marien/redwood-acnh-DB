@@ -13,7 +13,7 @@ const HousewarePage = () => {
   const myArray = []
 
   useEffect(() => {
-    fetch(`http://acnhapi.com/v1/houseware/`)
+    fetch(`https://acnhapi.com/v1/houseware/`)
       .then((response) => response.json())
       .then((json) => setStateAll(json))
   }, [])

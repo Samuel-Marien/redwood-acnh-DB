@@ -13,7 +13,7 @@ const SeaCreaturesPage = () => {
   const myArray = []
 
   useEffect(() => {
-    fetch(`http://acnhapi.com/v1/sea/`)
+    fetch(`https://acnhapi.com/v1/sea/`)
       .then((response) => response.json())
       .then((json) => setStateAll(json))
   }, [])

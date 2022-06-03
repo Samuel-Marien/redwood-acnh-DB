@@ -13,7 +13,7 @@ const ArtsPage = () => {
   const myArray = []
 
   useEffect(() => {
-    fetch(`http://acnhapi.com/v1/art/`)
+    fetch(`https://acnhapi.com/v1/art/`)
       .then((response) => response.json())
       .then((json) => setStateAll(json))
   }, [])

@@ -13,7 +13,7 @@ const MiscPage = () => {
   const myArray = []
 
   useEffect(() => {
-    fetch(`http://acnhapi.com/v1/misc/`)
+    fetch(`https://acnhapi.com/v1/misc/`)
       .then((response) => response.json())
       .then((json) => setStateAll(json))
   }, [])
