@@ -123,11 +123,13 @@ const CommonLayout = ({ children }) => {
                 />
               </button>
             ) : (
-              <MyNavBlockLink
-                name="Login"
-                icon={<RiLoginCircleFill />}
-                myRoutes={routes.login()}
-              />
+              <div className="lg:hidden">
+                <MyNavBlockLink
+                  name="Login"
+                  icon={<RiLoginCircleFill />}
+                  myRoutes={routes.login()}
+                />
+              </div>
             )}
           </div>
 
