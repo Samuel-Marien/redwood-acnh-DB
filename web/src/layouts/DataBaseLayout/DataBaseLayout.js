@@ -16,13 +16,30 @@ import {
   GiLoveSong,
   GiPaintBrush,
   GiFamilyHouse,
+  GiCubes,
   GiStoneWall,
   GiZigzagLeaf,
   GiSecretBook,
   GiDatabase,
 } from 'react-icons/gi'
-import { FaGithubSquare, FaTwitterSquare, FaLinkedin } from 'react-icons/fa'
 import { SiTinyletter } from 'react-icons/si'
+
+const MyLink = (props) => {
+  const { myRoutes, icon, name, onClick } = props
+  return (
+    <Link
+      onClick={onClick}
+      className="flex py-2 px-3 text-myBrown-200 hover:bg-myGreen-300 cursor-pointer transition-colors duration-300 hover:animate-pulse"
+      to={myRoutes}
+    >
+      <div className="flex items-center  ">
+        <div className="text-xl text-myBrown-100 ">{icon}</div>
+
+        <p className="ml-1 text-center text-sm font-bold">{name}</p>
+      </div>
+    </Link>
+  )
+}
 
 const MyNavBlockLink = (props) => {
   const { myRoutes, icon, name, onClick } = props
@@ -84,7 +101,7 @@ const MyTinyLink = (props) => {
   )
 }
 
-const CommonLayout = ({ children }) => {
+const DataBaseLayout = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [show, setShow] = useState(false)
   console.log(currentUser)
@@ -114,21 +131,13 @@ const CommonLayout = ({ children }) => {
                 </span>
               </div>
             ) : null}
-            {isAuthenticated ? (
-              <button className="lg:hidden btn btn-square btn-ghost text-myYellow-200">
-                <HiOutlineMenu
-                  size={35}
-                  onClick={() => (show ? setShow(false) : setShow(true))}
-                  className=""
-                />
-              </button>
-            ) : (
-              <MyNavBlockLink
-                name="Login"
-                icon={<RiLoginCircleFill />}
-                myRoutes={routes.login()}
+            <button className="lg:hidden btn btn-square btn-ghost text-myYellow-200">
+              <HiOutlineMenu
+                size={35}
+                onClick={() => (show ? setShow(false) : setShow(true))}
+                className=""
               />
-            )}
+            </button>
           </div>
 
           {/* NavBlock & login here :  */}
@@ -242,70 +251,61 @@ const CommonLayout = ({ children }) => {
             ) : null}
           </div>
         ) : null}
+
+        {/* Nav bar here :  */}
+        {isAuthenticated ? (
+          <div className="lg:flex justify-center hidden bg-myYellow-100">
+            <div className="flex ">
+              <MyLink
+                name="Fish"
+                icon={<GiFlatfish />}
+                myRoutes={routes.fishsPage()}
+              />
+              <MyLink
+                name="Sea creat."
+                icon={<GiSeahorse />}
+                myRoutes={routes.seaCreatures()}
+              />
+              <MyLink
+                name="Bugs"
+                icon={<GiSpottedBug />}
+                myRoutes={routes.bugs()}
+              />
+              <MyLink
+                name="Villagers"
+                icon={<GiBearFace />}
+                myRoutes={routes.villagers()}
+              />
+              <MyLink
+                name="Songs"
+                icon={<GiLoveSong />}
+                myRoutes={routes.songs()}
+              />
+              <MyLink
+                name="Arts"
+                icon={<GiPaintBrush />}
+                myRoutes={routes.arts()}
+              />
+              <MyLink
+                name="House"
+                icon={<GiFamilyHouse />}
+                myRoutes={routes.houseware()}
+              />
+              <MyLink
+                name="Paper"
+                icon={<GiStoneWall />}
+                myRoutes={routes.papers()}
+              />
+              <MyLink name="Misc" icon={<GiCubes />} myRoutes={routes.misc()} />
+            </div>
+          </div>
+        ) : null}
       </header>
 
       {/* Children here :  */}
       <main className="h-full">{children}</main>
-
-      {/* Footer here :  */}
-      <div className=" bg-myBrown-100 w-full py-2 md:py-4 flex justify-center">
-        <div className="flex flex-col md:flex-row items-center">
-          <Link to={routes.home()}>
-            <div className="flex items-center text-myBrown-200 mb-2 md:mb-0">
-              <div className="border-2 border-myGreen-200 shadow-lg p-1 rounded-xl bg-myYellow-200">
-                <span className="text md:text-4xl">
-                  <GiZigzagLeaf color={'#786951'} />
-                </span>
-              </div>
-              <p className="font-inika text-xl md:text-4xl ml-2  font-black tracking-tight">
-                ACNH <span className=" text-myGreen-100">DB</span>
-              </p>
-            </div>
-          </Link>
-          <p className="text-myBrown-200 text-xs ml-5 pl-4 border-l border-r pr-4 flex  mb-2 md:mb-0">
-            Build with ❤️ /{' '}
-            <a href="https://redwoodjs.com/" className="flex">
-              <span className="mx-1">RedwoodJs</span>
-              <img src="favicon.png" alt="icon redwood" className="w-4" />
-            </a>{' '}
-            <a href="http://acnhapi.com/" className="flex">
-              <span className="mx-1">/ ACNH API</span>
-              <img src="favicon-acnh.png" alt="icon redwood" className="w-4" />
-            </a>
-          </p>
-          <p className="ml-5 text-2xl text-myYellow-100 flex">
-            <a
-              className="hover:text-myGreen-100"
-              href="https://github.com/Samuel-Marien"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {' '}
-              <FaGithubSquare />
-            </a>
-            <a
-              className="hover:text-myGreen-100 ml-2"
-              href="https://twitter.com/Samuel_Marien"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {' '}
-              <FaTwitterSquare />
-            </a>
-            <a
-              className="hover:text-myGreen-100 ml-2"
-              href="https://www.linkedin.com/in/samuel-marien/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {' '}
-              <FaLinkedin />
-            </a>
-          </p>
-        </div>
-      </div>
     </div>
   )
 }
 
-export default CommonLayout
+export default DataBaseLayout

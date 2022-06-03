@@ -5,12 +5,13 @@ const HomePage = () => {
     <>
       <MetaTags title="Home" description="Home page" />
 
-      <img
+      {/* <img
         src="/images/illustration.jpg"
         alt="hero"
-        className=" self-end hidden md:block"
-      />
-      <img src="\images\illus2.jpg" alt="hero" className="self-end md:hidden" />
+        className=" self-end hidden md:block h-full"
+      /> */}
+      {/* <img src="\images\illus2.jpg" alt="hero" className="self-end md:hidden" /> */}
+      <img src="\images\illus2.jpg" alt="hero" className="self-end w-2/4" />
     </>
   )
 }
