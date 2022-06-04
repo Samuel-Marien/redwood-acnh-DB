@@ -4,7 +4,7 @@ import { routes } from '@redwoodjs/router'
 import { useState, useEffect } from 'react'
 import CardsDisplayer from 'src/components/CardsDisplayer/CardsDisplayer'
 import SearchBar from 'src/components/SearchBar/SearchBar'
-import Thumbnail from 'src/components/Thumbnail/Thumbnail'
+import ArtThumbnail from 'src/components/ArtThumbnail/ArtThumbnail'
 
 const ArtsPage = () => {
   const [state, setState] = useState([])
@@ -62,7 +62,7 @@ const ArtsPage = () => {
       />
       {state.id ? (
         <div className="flex justify-center my-2">
-          <Thumbnail
+          <ArtThumbnail
             state={state}
             myRoutes={routes.details({ id: state.id, dataBase: 'art' })}
           />

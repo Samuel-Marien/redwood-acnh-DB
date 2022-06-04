@@ -35,12 +35,14 @@ const FishsPagePage = () => {
   // console.log(stateAll)
 
   const onSubmit = (data) => {
+    // console.log(myArray)
     let nameTranslate = ''
     myArray.map((item) => {
       if (data.fishname === item.fr) {
+        // console.log('match! Fish :)')
         nameTranslate = item.en
       } else {
-        console.log('plop...')
+        console.log('Searching for match...')
       }
     })
     fetch(`https://acnhapi.com/v1/fish/${nameTranslate}`)
@@ -48,7 +50,7 @@ const FishsPagePage = () => {
       .then((json) => setState(json))
   }
 
-  // console.log(state.id)
+  console.log(state.id)
   return (
     <>
       <MetaTags title="FishsPage" description="FishsPage page" />

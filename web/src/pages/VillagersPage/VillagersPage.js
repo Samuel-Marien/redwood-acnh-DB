@@ -4,7 +4,7 @@ import { routes } from '@redwoodjs/router'
 import { useState, useEffect } from 'react'
 import CardsDisplayer from 'src/components/CardsDisplayer/CardsDisplayer'
 import SearchBar from 'src/components/SearchBar/SearchBar'
-import Thumbnail from 'src/components/Thumbnail/Thumbnail'
+import VillagerThumbnail from 'src/components/VillagerThumbnail'
 
 const VillagersPage = () => {
   const [state, setState] = useState([])
@@ -35,10 +35,14 @@ const VillagersPage = () => {
   const onSubmit = (data) => {
     let nameTranslate = ''
     myArray.map((item) => {
-      if (data.username === item.fr) {
+      if (
+        data.username.toUpperCase().slice(0, 1) + data.username.slice(1) ===
+        item.fr
+      ) {
+        console.log('match! Villager :)')
         nameTranslate = item.en
       } else {
-        console.log('plop...')
+        console.log('Searching for match...')
       }
     })
     fetch(`https://acnhapi.com/v1/villagers/${nameTranslate}`)
@@ -46,7 +50,8 @@ const VillagersPage = () => {
       .then((json) => setState(json))
   }
 
-  console.log(stateAll)
+  // console.log(stateAll)
+  // console.log(state)
 
   return (
     <>
@@ -63,7 +68,7 @@ const VillagersPage = () => {
       />
       {state.id ? (
         <div className="flex justify-center my-2">
-          <Thumbnail
+          <VillagerThumbnail
             state={state}
             myRoutes={routes.details({ id: state.id, dataBase: 'villagers' })}
           />
