@@ -4,7 +4,7 @@ import { routes } from '@redwoodjs/router'
 import { useState, useEffect } from 'react'
 import CardsDisplayer from 'src/components/CardsDisplayer/CardsDisplayer'
 import SearchBar from 'src/components/SearchBar/SearchBar'
-import Thumbnail from 'src/components/Thumbnail/Thumbnail'
+import HousewareThumbnail from 'src/components/HousewareThumbnail/HousewareThumbnail'
 
 const HousewarePage = () => {
   const [state, setState] = useState([])
@@ -35,7 +35,8 @@ const HousewarePage = () => {
   const onSubmit = (data) => {
     let nameTranslate = ''
     myArray.map((item) => {
-      if (data.username === item.fr) {
+      // console.log(item.fr)
+      if (data.username.toUpperCase() === item.fr.toUpperCase()) {
         nameTranslate = item.en
       } else {
         console.log('Searching for match...')
@@ -43,10 +44,11 @@ const HousewarePage = () => {
     })
     fetch(`https://acnhapi.com/v1/houseware/${nameTranslate}`)
       .then((response) => response.json())
-      .then((json) => setState(json))
+      .then((json) => setState(json[0]))
   }
 
-  console.log(stateAll)
+  // console.log(state)
+  // console.log(stateAll)
   return (
     <>
       <MetaTags title="Houseware" description="Houseware page" />
@@ -60,12 +62,12 @@ const HousewarePage = () => {
         ressourcesName="Houseware"
         dataBase="houseware"
       />
-      {state.id ? (
+      {state['internal-id'] ? (
         <div className="flex justify-center my-2">
-          <Thumbnail
+          <HousewareThumbnail
             state={state}
             myRoutes={routes.details({
-              id: state[0]['internal-id'],
+              id: state['internal-id'],
               dataBase: 'houseware',
             })}
           />

@@ -4,7 +4,7 @@ import { routes } from '@redwoodjs/router'
 import { useState, useEffect } from 'react'
 import CardsDisplayer from 'src/components/CardsDisplayer/CardsDisplayer'
 import SearchBar from 'src/components/SearchBar/SearchBar'
-import Thumbnail from 'src/components/Thumbnail/Thumbnail'
+import SongThumbnail from 'src/components/SongThumbnail/SongThumbnail'
 
 const SongsPage = () => {
   const [state, setState] = useState([])
@@ -33,12 +33,13 @@ const SongsPage = () => {
   }, [myArray, stateAll])
 
   const onSubmit = (data) => {
+    console.log(data.username.toUpperCase())
     let nameTranslate = ''
     myArray.map((item) => {
-      if (data.username === item.fr) {
+      if (data.username.toUpperCase() === item.fr.toUpperCase()) {
         nameTranslate = item.en
       } else {
-        console.log('plop...')
+        console.log('Searching for match...')
       }
     })
     fetch(`https://acnhapi.com/v1/songs/${nameTranslate}`)
@@ -46,7 +47,7 @@ const SongsPage = () => {
       .then((json) => setState(json))
   }
 
-  console.log(stateAll)
+  // console.log(stateAll)
 
   return (
     <>
@@ -63,7 +64,7 @@ const SongsPage = () => {
       />
       {state.id ? (
         <div className="flex justify-center my-2">
-          <Thumbnail
+          <SongThumbnail
             state={state}
             myRoutes={routes.details({ id: state.id, dataBase: 'songs' })}
           />

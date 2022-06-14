@@ -125,6 +125,7 @@ const Card = (props) => {
           </p>
         ) : null}
       </div>
+
       {/* this section for songs */}
       <div className="flex justify-center w-full text-myYellow-100">
         {item['buy-price'] ? (

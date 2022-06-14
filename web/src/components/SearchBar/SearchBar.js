@@ -27,14 +27,12 @@ const SearchBar = (props) => {
         <div className="flex justify-center items-center">
           {state.id ? (
             <div>
-              <Link to={routes.fishsPage()}>
-                <button
-                  onClick={onClick}
-                  className="text-3xl mr-2 text-myPink-100 hover:text-myPink-200 transition-colors hover:animate-pulse"
-                >
-                  <BiReset />
-                </button>
-              </Link>
+              <button
+                onClick={onClick}
+                className="text-3xl mr-2 text-myPink-100 hover:text-myPink-200 transition-colors hover:animate-pulse"
+              >
+                <BiReset />
+              </button>
             </div>
           ) : null}
           <Form onSubmit={onSubmit} style={{ fontSize: '2rem' }}>

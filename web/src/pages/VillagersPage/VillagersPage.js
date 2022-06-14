@@ -35,11 +35,7 @@ const VillagersPage = () => {
   const onSubmit = (data) => {
     let nameTranslate = ''
     myArray.map((item) => {
-      if (
-        data.username.toUpperCase().slice(0, 1) + data.username.slice(1) ===
-        item.fr
-      ) {
-        console.log('match! Villager :)')
+      if (data.username.toUpperCase() === item.fr.toUpperCase()) {
         nameTranslate = item.en
       } else {
         console.log('Searching for match...')
