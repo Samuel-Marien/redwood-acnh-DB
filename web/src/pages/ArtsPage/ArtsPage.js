@@ -46,7 +46,7 @@ const ArtsPage = () => {
       .then((json) => setState(json))
   }
 
-  console.log(stateAll)
+  // console.log(stateAll)
   return (
     <>
       <MetaTags title="Arts" description="Arts page" />

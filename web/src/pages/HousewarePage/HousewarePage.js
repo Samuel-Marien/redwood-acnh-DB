@@ -4,7 +4,7 @@ import { routes } from '@redwoodjs/router'
 import { useState, useEffect } from 'react'
 import CardsDisplayer from 'src/components/CardsDisplayer/CardsDisplayer'
 import SearchBar from 'src/components/SearchBar/SearchBar'
-import HousewareThumbnail from 'src/components/HousewareThumbnail/HousewareThumbnail'
+import ItemThumbnail from 'src/components/ItemThumbnail/ItemThumbnail'
 
 const HousewarePage = () => {
   const [state, setState] = useState([])
@@ -34,17 +34,20 @@ const HousewarePage = () => {
 
   const onSubmit = (data) => {
     let nameTranslate = ''
-    myArray.map((item) => {
-      // console.log(item.fr)
-      if (data.username.toUpperCase() === item.fr.toUpperCase()) {
-        nameTranslate = item.en
-      } else {
-        console.log('Searching for match...')
-      }
-    })
-    fetch(`https://acnhapi.com/v1/houseware/${nameTranslate}`)
-      .then((response) => response.json())
-      .then((json) => setState(json[0]))
+    try {
+      myArray.map((item) => {
+        if (data.username.toUpperCase() === item.fr.toUpperCase()) {
+          nameTranslate = item.en
+          fetch(`https://acnhapi.com/v1/houseware/${nameTranslate}`)
+            .then((response) => response.json())
+            .then((json) => setState(json[0]))
+        } else {
+          console.log('Searching for match...')
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   // console.log(state)
@@ -64,7 +67,7 @@ const HousewarePage = () => {
       />
       {state['internal-id'] ? (
         <div className="flex justify-center my-2">
-          <HousewareThumbnail
+          <ItemThumbnail
             state={state}
             myRoutes={routes.details({
               id: state['internal-id'],

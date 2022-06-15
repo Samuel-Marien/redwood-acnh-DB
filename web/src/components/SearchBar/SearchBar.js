@@ -25,7 +25,7 @@ const SearchBar = (props) => {
           <h1>{ressourcesName} DataBase</h1>
         </div>
         <div className="flex justify-center items-center">
-          {state.id ? (
+          {state.id || state['internal-id'] ? (
             <div>
               <button
                 onClick={onClick}

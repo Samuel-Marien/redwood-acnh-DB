@@ -104,7 +104,7 @@ const MyTinyLink = (props) => {
 const DataBaseLayout = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [show, setShow] = useState(false)
-  console.log(currentUser)
+  // console.log(currentUser)
 
   return (
     <div className="h-screen flex flex-col justify-between">

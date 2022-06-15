@@ -46,7 +46,7 @@ const SeaCreaturesPage = () => {
       .then((json) => setState(json))
   }
 
-  console.log(stateAll)
+  // console.log(stateAll)
 
   return (
     <>

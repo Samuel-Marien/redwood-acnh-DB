@@ -46,7 +46,7 @@ const BugsPage = () => {
       .then((json) => setState(json))
   }
 
-  console.log(stateAll)
+  // console.log(stateAll)
 
   return (
     <>

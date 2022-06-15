@@ -1,4 +1,4 @@
-import HousewareThumbnail from './HousewareThumbnail'
+import HousewareThumbnail from './ItemThumbnail'
 
 export const generated = () => {
   return <HousewareThumbnail />
