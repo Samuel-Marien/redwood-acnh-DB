@@ -14,11 +14,11 @@ const DetailsPage = ({ id, dataBase }) => {
   console.log(state)
 
   return (
-    <>
+    <div className="bgImageFish h-full pt-10">
       <MetaTags title="Details" description="Details page" />
 
       <Details data={state} />
-    </>
+    </div>
   )
 }
 

@@ -2,6 +2,7 @@ import { Private, Router, Route, Set } from '@redwoodjs/router'
 import PostsLayout from 'src/layouts/PostsLayout'
 import CommonLayout from 'src/layouts/CommonLayout'
 import DataBaseLayout from 'src/layouts/DataBaseLayout/DataBaseLayout'
+import CardDetailLayout from './layouts/CardDetailsLayout/CardDetailsLayout'
 
 const Routes = () => {
   return (
@@ -34,6 +35,8 @@ const Routes = () => {
         <Route path="/houseware" page={HousewarePage} name="houseware" />
         <Route path="/papers" page={PapersPage} name="papers" />
         <Route path="/misc" page={MiscPage} name="misc" />
+      </Set>
+      <Set wrap={CardDetailLayout}>
         <Route path="/details/{id}" page={DetailsPage} name="details" />
       </Set>
       <Route notfound page={NotFoundPage} />

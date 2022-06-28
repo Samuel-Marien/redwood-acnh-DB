@@ -23,12 +23,17 @@ import {
   GiZigzagLeaf,
   GiSecretBook,
 } from 'react-icons/gi'
-import { SiTinyletter } from 'react-icons/si'
+import { SiTinyletter, SiRedwoodjs } from 'react-icons/si'
+import {
+  FaGithubSquare,
+  FaTwitterSquare,
+  FaLinkedin,
+  FaLeaf,
+} from 'react-icons/fa'
 
-const DataBaseLayout = ({ children }) => {
+const CardDetailLayout = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [show, setShow] = useState(false)
-  // console.log(currentUser)
 
   return (
     <div className="h-screen flex flex-col justify-between">
@@ -229,8 +234,66 @@ const DataBaseLayout = ({ children }) => {
       <Toaster />
       {/* Children here :  */}
       <main className="h-full">{children}</main>
+
+      {/* Footer here :  */}
+      <div className=" bg-myBrown-100 w-full py-2 md:py-4 flex justify-center">
+        <div className="flex flex-col md:flex-row items-center">
+          <Link to={routes.home()}>
+            <div className="flex items-center text-myBrown-200 mb-2 md:mb-0">
+              <div className="border-2 border-myGreen-200 shadow-lg p-1 rounded-xl bg-myYellow-200">
+                <span className="text md:text-4xl">
+                  <GiZigzagLeaf color={'#786951'} />
+                </span>
+              </div>
+              <p className="font-inika text-xl md:text-4xl ml-2  font-black tracking-tight">
+                ACNH <span className=" text-myGreen-100">DB</span>
+              </p>
+            </div>
+          </Link>
+          <p className="text-myBrown-200 text-xs ml-5 pl-4 border-l border-r pr-4 flex  mb-2 md:mb-0">
+            Build with ❤️ /{' '}
+            <a href="https://redwoodjs.com/" className="flex items-center">
+              <span className="mx-1">RedwoodJs</span>
+              <SiRedwoodjs />
+            </a>{' '}
+            <a href="http://acnhapi.com/" className="flex items-center">
+              <span className="mx-1">/ ACNH API</span>
+              <FaLeaf />
+            </a>
+          </p>
+          <p className="ml-5 text-2xl text-myYellow-100 flex">
+            <a
+              className="hover:text-myGreen-100"
+              href="https://github.com/Samuel-Marien"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {' '}
+              <FaGithubSquare />
+            </a>
+            <a
+              className="hover:text-myGreen-100 ml-2"
+              href="https://twitter.com/Samuel_Marien"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {' '}
+              <FaTwitterSquare />
+            </a>
+            <a
+              className="hover:text-myGreen-100 ml-2"
+              href="https://www.linkedin.com/in/samuel-marien/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {' '}
+              <FaLinkedin />
+            </a>
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
 
-export default DataBaseLayout
+export default CardDetailLayout

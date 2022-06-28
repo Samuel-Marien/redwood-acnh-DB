@@ -20,75 +20,13 @@ import {
   GiStoneWall,
   GiZigzagLeaf,
   GiSecretBook,
-  GiDatabase,
 } from 'react-icons/gi'
 import { FaGithubSquare, FaTwitterSquare, FaLinkedin } from 'react-icons/fa'
 import { SiTinyletter } from 'react-icons/si'
 
-const MyNavBlockLink = (props) => {
-  const { myRoutes, icon, name, onClick } = props
-  return (
-    <Link
-      onClick={onClick}
-      className="flex py-2 px-3 text-myBrown-200 cursor-pointer transition-colors duration-300 hover:animate-pulse"
-      to={myRoutes}
-    >
-      <div className="flex items-center  ">
-        <div className=" text-myBlue-300 ">{icon}</div>
-
-        <p className="ml-1 text-center font-inika uppercase">{name}</p>
-      </div>
-    </Link>
-  )
-}
-
-const NavBlock = () => {
-  return (
-    <>
-      <MyNavBlockLink
-        name="Blog"
-        icon={<GiSecretBook />}
-        myRoutes={routes.blog()}
-      />
-      <MyNavBlockLink
-        name="DataBase"
-        icon={<GiDatabase />}
-        myRoutes={routes.bugs()}
-      />
-      <MyNavBlockLink
-        name="My Island"
-        icon={<RiHome7Line />}
-        myRoutes={routes.login()}
-      />
-      <MyNavBlockLink
-        name=""
-        icon={<SiTinyletter />}
-        myRoutes={routes.contact()}
-      />
-
-      {/* <div className="flex flex-col">
-        <span className="mb-2 text-myGreen-100 hover:text-myGreen-200 cursor-pointer">
-          <RiMoonFill />
-        </span>
-        <span className=" text-myGreen-100 hover:text-myGreen-200 cursor-pointer">
-          <RiSunFill />{' '}
-        </span>
-      </div> */}
-    </>
-  )
-}
-
-const MyTinyLink = (props) => {
-  const { myRoutes, icon, name, onClick } = props
-  return (
-    <Link to={myRoutes} onClick={onClick}>
-      <li className="flex items-center pl-2  border-b py-2 shadow bg-slate-200 hover:bg-slate-400 transition-colors duration-300">
-        <span className="mr-2 text-2xl text-myBlue-100">{icon}</span>
-        <span className="text-myBlue-100 ">{name}</span>
-      </li>
-    </Link>
-  )
-}
+import MyNavBlockLink from 'src/components/layoutCompos/MyNavBlockLink'
+import NavBlock from 'src/components/layoutCompos/NavBlock'
+import MyTinyLink from 'src/components/layoutCompos/MyTinyLink'
 
 const CommonLayout = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
