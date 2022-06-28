@@ -17,7 +17,7 @@ const DetailsPage = ({ id, dataBase }) => {
     <div className="bgImageFish h-full pt-10">
       <MetaTags title="Details" description="Details page" />
 
-      <Details data={state} />
+      <Details data={state} dataBase={dataBase} />
     </div>
   )
 }
