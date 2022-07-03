@@ -70,7 +70,9 @@ const VillagersPage = () => {
           />
         </div>
       ) : null}
-      <CardsDisplayer cardsDatas={stateAll} dataBase="villagers" />
+      <div>
+        <CardsDisplayer cardsDatas={stateAll} dataBase="villagers" />
+      </div>
     </>
   )
 }

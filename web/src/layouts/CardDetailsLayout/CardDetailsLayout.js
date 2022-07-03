@@ -236,7 +236,7 @@ const CardDetailLayout = ({ children }) => {
       <main className="h-full">{children}</main>
 
       {/* Footer here :  */}
-      <div className=" bg-myBrown-100 w-full py-2 md:py-4 flex justify-center ">
+      <div className=" bg-myBrown-100 w-full py-2 md:py-4 flex justify-center">
         <div className="flex flex-col md:flex-row items-center">
           <Link to={routes.home()}>
             <div className="flex items-center text-myBrown-200 mb-2 md:mb-0">
