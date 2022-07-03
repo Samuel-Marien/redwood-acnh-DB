@@ -36,7 +36,7 @@ const CardDetailLayout = ({ children }) => {
   const [show, setShow] = useState(false)
 
   return (
-    <div className="h-screen flex flex-col justify-between">
+    <div className="h-max md:h-screen flex flex-col justify-between">
       <header className="">
         <nav className="px-2 lg:px-20 py-2 flex flex-col lg:flex-row items-center justify-between bg-myBrown-100">
           {/* Logo & button & logged username here :  */}
@@ -236,7 +236,7 @@ const CardDetailLayout = ({ children }) => {
       <main className="h-full">{children}</main>
 
       {/* Footer here :  */}
-      <div className=" bg-myBrown-100 w-full py-2 md:py-4 xs:flex justify-center hidden">
+      <div className=" bg-myBrown-100 w-full py-2 md:py-4 flex justify-center ">
         <div className="flex flex-col md:flex-row items-center">
           <Link to={routes.home()}>
             <div className="flex items-center text-myBrown-200 mb-2 md:mb-0">

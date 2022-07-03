@@ -245,7 +245,7 @@ const Details = (props) => {
 
                 {/* price cj only for fish page  */}
                 {data['price-cj'] && dataBase === 'fish' ? (
-                  <p className="flex items-center">
+                  <div className="flex items-center">
                     <span className="mr-1  text-xl text-myBrown-100">
                       <GiSwapBag />
                     </span>
@@ -254,12 +254,12 @@ const Details = (props) => {
                       {data['price-cj']}{' '}
                       <span className="ml-1 italic text-xs">(Pollux)</span>
                     </p>
-                  </p>
+                  </div>
                 ) : null}
 
                 {/* price cj only for bugs page  */}
                 {data['price-flick'] && dataBase === 'bugs' ? (
-                  <p className="flex items-center">
+                  <div className="flex items-center">
                     <span className="mr-1  text-xl text-myBrown-100">
                       <GiSwapBag />
                     </span>
@@ -268,7 +268,7 @@ const Details = (props) => {
                       {data['price-flick']}
                       <span className="ml-1 italic text-xs">(flick)</span>
                     </p>
-                  </p>
+                  </div>
                 ) : null}
 
                 {/* speed info only for sea creature  */}

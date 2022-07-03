@@ -14,7 +14,7 @@ const DetailsPage = ({ id, dataBase }) => {
   console.log(state)
 
   return (
-    <div className="bgImageFish h-full pt-10">
+    <div className="bgImageFish h-max md:h-full py-10">
       <MetaTags title="Details" description="Details page" />
 
       <Details data={state} dataBase={dataBase} />
