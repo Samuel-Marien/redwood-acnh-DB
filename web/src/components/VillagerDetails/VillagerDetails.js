@@ -9,7 +9,7 @@ const VillagerDetails = (props) => {
   const { data, dataBase } = props
 
   console.log(dataBase)
-  console.log(data)
+  // console.log(data)
 
   const addToFavorite = (pokeName) => {
     try {
