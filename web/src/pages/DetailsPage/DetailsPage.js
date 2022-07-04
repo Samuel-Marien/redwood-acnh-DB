@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 import Details from 'src/components/Details/Details'
 import VillagerDetails from 'src/components/VillagerDetails/VillagerDetails'
+import SongDetails from 'src/components/SongDetails/SongDetails'
 import MyBreadCrumb from 'src/components/MyBreadCrumb/MyBreadCrumb'
 
 const DetailsPage = ({ id, dataBase }) => {
@@ -67,6 +68,11 @@ const DetailsPage = ({ id, dataBase }) => {
       {/* Display info for villagers items  */}
       {dataBase === 'villagers' ? (
         <VillagerDetails data={state} dataBase={dataBase} />
+      ) : null}
+
+      {/* Display infos for songs  */}
+      {dataBase === 'songs' ? (
+        <SongDetails data={state} dataBase={dataBase} />
       ) : null}
     </div>
   )

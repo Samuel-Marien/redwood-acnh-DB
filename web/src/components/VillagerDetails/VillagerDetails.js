@@ -6,9 +6,9 @@ import { BsGenderAmbiguous } from 'react-icons/bs'
 import { GiFrogFoot, GiAura, GiBasketballBall } from 'react-icons/gi'
 
 const VillagerDetails = (props) => {
-  const { data, dataBase } = props
+  const { data } = props
 
-  console.log(dataBase)
+  // console.log(dataBase)
   // console.log(data)
 
   const addToFavorite = (pokeName) => {

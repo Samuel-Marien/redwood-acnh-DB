@@ -49,7 +49,7 @@ const SongThumbnail = (props) => {
       </Link>
       <figure className=" opacity-50 flex justify-center my-5">
         <audio controls src={state.music_uri}>
-          <track kind="captions" {...props} />
+          <track kind="captions" />
           <code>audio</code> element.
         </audio>
       </figure>
