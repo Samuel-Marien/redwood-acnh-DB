@@ -6,6 +6,7 @@ import Details from 'src/components/Details/Details'
 import VillagerDetails from 'src/components/VillagerDetails/VillagerDetails'
 import SongDetails from 'src/components/SongDetails/SongDetails'
 import MyBreadCrumb from 'src/components/MyBreadCrumb/MyBreadCrumb'
+import ArtDetails from 'src/components/ArtDetails/ArtDetails'
 
 const DetailsPage = ({ id, dataBase }) => {
   const [state, setState] = useState([])
@@ -32,7 +33,7 @@ const DetailsPage = ({ id, dataBase }) => {
           return routes.bugs()
         case 'songs':
           return routes.songs()
-        case 'arts':
+        case 'art':
           return routes.arts()
         case 'houseware':
           return routes.houseware()
@@ -60,12 +61,12 @@ const DetailsPage = ({ id, dataBase }) => {
         />
       ) : null}
 
-      {/* Display info for sea, bugs and fishs items  */}
+      {/* Display info for sea, bugs and fishs   */}
       {dataBase === 'fish' || dataBase === 'sea' || dataBase === 'bugs' ? (
         <Details data={state} dataBase={dataBase} />
       ) : null}
 
-      {/* Display info for villagers items  */}
+      {/* Display info for villagers   */}
       {dataBase === 'villagers' ? (
         <VillagerDetails data={state} dataBase={dataBase} />
       ) : null}
@@ -73,6 +74,11 @@ const DetailsPage = ({ id, dataBase }) => {
       {/* Display infos for songs  */}
       {dataBase === 'songs' ? (
         <SongDetails data={state} dataBase={dataBase} />
+      ) : null}
+
+      {/* Display infos for art  */}
+      {dataBase === 'art' ? (
+        <ArtDetails data={state} dataBase={dataBase} />
       ) : null}
     </div>
   )

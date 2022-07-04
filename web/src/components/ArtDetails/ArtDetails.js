@@ -3,7 +3,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { GiPayMoney, GiReceiveMoney } from 'react-icons/gi'
 import { RiHeartAddFill } from 'react-icons/ri'
 
-const SongDetails = (props) => {
+const ArtDetails = (props) => {
   const { data } = props
 
   const addToFavorite = (pokeName) => {
@@ -21,7 +21,7 @@ const SongDetails = (props) => {
   return (
     <>
       {data.name ? (
-        <div className="my-5 md:my-0 shadow-lg py-4 px-2 md:px-8 font-inika lg:w-6/12 w-10/12 mx-auto bg-myBrown-200 rounded-xl">
+        <div className="my-10 md:my-0 shadow-lg py-4 px-2 md:px-8 font-inika lg:w-6/12 w-10/12 mx-auto bg-myBrown-200 rounded-xl">
           <div className="flex justify-between items-center mb-8 md:mb-0">
             <button
               className="text-red-500 text-3xl shadow-inner p-1 rounded-full hover:shadow-none duration-300 cursor-pointer hover:text-red-700 active:text-red-300 "
@@ -64,17 +64,10 @@ const SongDetails = (props) => {
               </p>
             </div>
           </div>
-
-          <figure className=" opacity-50 flex justify-center my-5">
-            <audio controls src={data.music_uri}>
-              <track kind="captions" />
-              <code>audio</code> element.
-            </audio>
-          </figure>
         </div>
       ) : null}
     </>
   )
 }
 
-export default SongDetails
+export default ArtDetails
