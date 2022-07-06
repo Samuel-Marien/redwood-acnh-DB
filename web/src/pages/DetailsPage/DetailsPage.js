@@ -7,9 +7,11 @@ import VillagerDetails from 'src/components/VillagerDetails/VillagerDetails'
 import SongDetails from 'src/components/SongDetails/SongDetails'
 import MyBreadCrumb from 'src/components/MyBreadCrumb/MyBreadCrumb'
 import ArtDetails from 'src/components/ArtDetails/ArtDetails'
+import ItemDetails from 'src/components/ItemDetails/ItemDetails'
 
 const DetailsPage = ({ id, dataBase }) => {
   const [state, setState] = useState([])
+  const [breadCrumbName, setBreadCrumbName] = useState(null)
 
   useEffect(() => {
     fetch(`https://acnhapi.com/v1/${dataBase}/${id}`)
@@ -17,7 +19,7 @@ const DetailsPage = ({ id, dataBase }) => {
       .then((json) => setState(json))
   }, [id, dataBase])
 
-  // console.log(state)
+  console.log(state)
   console.log(dataBase)
 
   const breadCrumbRouteHelper = (base) => {
@@ -49,14 +51,32 @@ const DetailsPage = ({ id, dataBase }) => {
     }
   }
 
+  useEffect(() => {
+    try {
+      setBreadCrumbName(state[0].name['name-EUfr'])
+    } catch (e) {
+      console.log(e)
+    }
+  }, [state])
+
   return (
     <div className="bgImageFish h-full py-10">
       <MetaTags title="Details" description="Details page" />
 
-      {state.name ? (
+      {/* Breadcrumn for section != items  */}
+      {state.name && dataBase != 'houseware' ? (
         <MyBreadCrumb
           dataBase={dataBase}
           stateName={state.name['name-EUfr']}
+          myRoutes={breadCrumbRouteHelper(dataBase)}
+        />
+      ) : null}
+
+      {/* breadcrumb for items section  */}
+      {breadCrumbName && dataBase === 'houseware' ? (
+        <MyBreadCrumb
+          dataBase={dataBase}
+          stateName={breadCrumbName}
           myRoutes={breadCrumbRouteHelper(dataBase)}
         />
       ) : null}
@@ -79,6 +99,11 @@ const DetailsPage = ({ id, dataBase }) => {
       {/* Display infos for art  */}
       {dataBase === 'art' ? (
         <ArtDetails data={state} dataBase={dataBase} />
+      ) : null}
+
+      {/* Display infos for house, paper, misc  */}
+      {dataBase === 'houseware' ? (
+        <ItemDetails data={state} dataBase={dataBase} />
       ) : null}
     </div>
   )

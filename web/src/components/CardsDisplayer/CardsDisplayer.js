@@ -223,9 +223,13 @@ const CardsDisplayer = (props) => {
   const [data, setData] = useState([])
   const pagePostsLimit = 12
   const datasSanityze = []
+  const originalName = []
+  // console.log(cardsDatas)
 
   try {
     for (let item of Object.getOwnPropertyNames(cardsDatas)) {
+      // console.log(item)
+      originalName.push(item)
       datasSanityze.push(cardsDatas[item])
     }
   } catch (err) {
@@ -350,6 +354,10 @@ const CardsDisplayer = (props) => {
   }
 
   // console.log(dataBase)
+  // console.log(cardsDatas)
+  // console.log(originalName.length)
+  // console.log(data)
+  // console.log(datasSanityze.length)
 
   return (
     <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-gradient-to-t via-myBrown-200  from-myBrown-200">
@@ -640,7 +648,10 @@ const CardsDisplayer = (props) => {
                   return (
                     <Link
                       to={routes.details({
-                        id: item[0]['internal-id'],
+                        id: originalName[
+                          index + (currentPage - 1) * pagePostsLimit
+                        ],
+                        // id:untrucnouveau
                         dataBase,
                       })}
                       key={index}
@@ -673,7 +684,9 @@ const CardsDisplayer = (props) => {
                   return (
                     <Link
                       to={routes.details({
-                        id: item[0]['internal-id'],
+                        id: originalName[
+                          index + (currentPage - 1) * pagePostsLimit
+                        ],
                         dataBase,
                       })}
                       key={index}

@@ -34,6 +34,7 @@ const HousewarePage = () => {
 
   const onSubmit = (data) => {
     let nameTranslate = ''
+
     try {
       myArray.map((item) => {
         if (data.username.toUpperCase() === item.fr.toUpperCase()) {
@@ -52,6 +53,7 @@ const HousewarePage = () => {
 
   // console.log(state)
   // console.log(stateAll)
+
   return (
     <>
       <MetaTags title="Houseware" description="Houseware page" />
@@ -65,17 +67,21 @@ const HousewarePage = () => {
         ressourcesName="Houseware"
         dataBase="houseware"
       />
+
+      {/* Display result for one card  */}
       {state['internal-id'] ? (
         <div className="flex justify-center my-2">
           <ItemThumbnail
             state={state}
             myRoutes={routes.details({
-              id: state['internal-id'],
+              id: state.name['name-USen'],
               dataBase: 'houseware',
             })}
           />
         </div>
       ) : null}
+
+      {/* Display all cards  */}
       <CardsDisplayer cardsDatas={stateAll} dataBase="houseware" />
     </>
   )
