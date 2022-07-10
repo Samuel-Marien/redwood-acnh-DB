@@ -66,20 +66,24 @@ const DetailsPage = ({ id, dataBase }) => {
 
       {/* Breadcrumn for section != items  */}
       {state.name && dataBase != 'houseware' ? (
-        <MyBreadCrumb
-          dataBase={dataBase}
-          stateName={state.name['name-EUfr']}
-          myRoutes={breadCrumbRouteHelper(dataBase)}
-        />
+        <div className="text-base md:text-xlmb-2 font-inika  mx-auto  text-myYellow-100 lg:w-6/12 w-10/12">
+          <MyBreadCrumb
+            dataBase={dataBase}
+            stateName={state.name['name-EUfr']}
+            myRoutes={breadCrumbRouteHelper(dataBase)}
+          />
+        </div>
       ) : null}
 
       {/* breadcrumb for items section  */}
       {breadCrumbName && dataBase === 'houseware' ? (
-        <MyBreadCrumb
-          dataBase={dataBase}
-          stateName={breadCrumbName}
-          myRoutes={breadCrumbRouteHelper(dataBase)}
-        />
+        <div className="text-base md:text-xlmb-2 font-inika  mx-auto  text-myYellow-100 w-10/12 xl:w-7/12 2xl:w-5/12">
+          <MyBreadCrumb
+            dataBase={dataBase}
+            stateName={breadCrumbName}
+            myRoutes={breadCrumbRouteHelper(dataBase)}
+          />
+        </div>
       ) : null}
 
       {/* Display info for sea, bugs and fishs   */}
