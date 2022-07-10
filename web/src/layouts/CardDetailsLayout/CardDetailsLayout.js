@@ -175,6 +175,12 @@ const CardDetailLayout = ({ children }) => {
                     myRoutes={routes.papers()}
                     onClick={() => (show ? setShow(false) : setShow(true))}
                   />
+                  <MyTinyLink
+                    name="Misc"
+                    icon={<GiCubes />}
+                    myRoutes={routes.misc()}
+                    onClick={() => (show ? setShow(false) : setShow(true))}
+                  />
                 </ul>
               </nav>
             ) : null}

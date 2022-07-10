@@ -20,6 +20,7 @@ import {
   GiStoneWall,
   GiZigzagLeaf,
   GiSecretBook,
+  GiCubes,
 } from 'react-icons/gi'
 import { FaGithubSquare, FaTwitterSquare, FaLinkedin } from 'react-icons/fa'
 import { SiTinyletter } from 'react-icons/si'
@@ -186,6 +187,12 @@ const CommonLayout = ({ children }) => {
                     name="Paper"
                     icon={<GiStoneWall />}
                     myRoutes={routes.papers()}
+                    onClick={() => (show ? setShow(false) : setShow(true))}
+                  />
+                  <MyTinyLink
+                    name="Misc"
+                    icon={<GiCubes />}
+                    myRoutes={routes.misc()}
                     onClick={() => (show ? setShow(false) : setShow(true))}
                   />
                 </ul>
