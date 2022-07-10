@@ -5,7 +5,7 @@ const MyBreadCrumb = (props) => {
 
   return (
     <div>
-      <div className="mb-2 font-inika lg:w-6/12 w-10/12 mx-auto text-xl text-myYellow-100">
+      <div className="text-base md:text-xlmb-2 font-inika lg:w-6/12 w-10/12 mx-auto  text-myYellow-100">
         <nav>
           <ul className=" flex">
             <li>

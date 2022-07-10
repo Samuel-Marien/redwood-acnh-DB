@@ -12,7 +12,14 @@
  * END --- SETUP TAILWINDCSS EDIT
  */
 
- .bgImageFish{
+.bgImageFish {
   background-image: url('/public/images/scott-zenteno-aczine-sandz-artist-3.jpg');
- }
+}
 
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}

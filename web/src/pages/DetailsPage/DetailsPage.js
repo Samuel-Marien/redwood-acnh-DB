@@ -20,7 +20,7 @@ const DetailsPage = ({ id, dataBase }) => {
   }, [id, dataBase])
 
   console.log(state)
-  console.log(dataBase)
+  // console.log(dataBase)
 
   const breadCrumbRouteHelper = (base) => {
     try {
@@ -55,9 +55,10 @@ const DetailsPage = ({ id, dataBase }) => {
     try {
       setBreadCrumbName(state[0].name['name-EUfr'])
     } catch (e) {
-      console.log(e)
+      // eslint-disable-next-line no-unused-vars
+      const myError = e
     }
-  }, [state])
+  }, [dataBase, state])
 
   return (
     <div className="bgImageFish h-full py-10">
@@ -101,7 +102,7 @@ const DetailsPage = ({ id, dataBase }) => {
         <ArtDetails data={state} dataBase={dataBase} />
       ) : null}
 
-      {/* Display infos for house, paper, misc  */}
+      {/* Display infos for house, ..., ...  */}
       {dataBase === 'houseware' ? (
         <ItemDetails data={state} dataBase={dataBase} />
       ) : null}

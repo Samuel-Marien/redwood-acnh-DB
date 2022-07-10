@@ -354,10 +354,14 @@ const CardsDisplayer = (props) => {
   }
 
   // console.log(dataBase)
-  // console.log(cardsDatas)
+  // console.log(
+  //   datasSanityze
+  //     ? datasSanityze.map((item) => item).filter((item) => item.length === 2)
+  //     : null
+  // )
   // console.log(originalName.length)
   // console.log(data)
-  // console.log(datasSanityze.length)
+  // console.log(datasSanityze)
 
   return (
     <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-gradient-to-t via-myBrown-200  from-myBrown-200">
