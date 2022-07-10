@@ -15,5 +15,5 @@ yarn install
 yarn rw dev
 ```
 
-![Screenshot](screenshot.png)
+![Screenshot](pic_git.png)
 
