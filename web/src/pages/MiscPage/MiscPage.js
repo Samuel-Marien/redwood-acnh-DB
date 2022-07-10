@@ -9,6 +9,7 @@ import ItemThumbnail from 'src/components/ItemThumbnail/ItemThumbnail'
 const MiscPage = () => {
   const [state, setState] = useState([])
   const [stateAll, setStateAll] = useState({})
+  const [myDevId, setMyDevId] = useState('')
 
   const myArray = []
 
@@ -41,6 +42,7 @@ const MiscPage = () => {
           fetch(`https://acnhapi.com/v1/misc/${nameTranslate}`)
             .then((response) => response.json())
             .then((json) => setState(json[0]))
+            .then(setMyDevId(nameTranslate))
         } else {
           console.log('Searching for match...')
         }
@@ -49,8 +51,9 @@ const MiscPage = () => {
       console.log(error)
     }
   }
+  state.devId = myDevId
 
-  // console.log(state)
+  console.log(state)
 
   return (
     <>
@@ -70,7 +73,7 @@ const MiscPage = () => {
           <ItemThumbnail
             state={state}
             myRoutes={routes.details({
-              id: state['internal-id'],
+              id: state.devId,
               dataBase: 'misc',
             })}
           />

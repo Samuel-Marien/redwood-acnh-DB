@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Pagination } from 'react-pagination-bar'
 import 'react-pagination-bar/dist/index.css'
 import './index.css'
+
 import {
   BsSortNumericDown,
   BsSortNumericUpAlt,
@@ -168,7 +169,6 @@ const Card2 = (props) => {
       <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
         <img src={item[0].image_uri} alt={item[0].name['name-EUfr']} />
       </div>
-
       <div className="flex justify-center w-full text-myYellow-100">
         {item[0]['buy-price'] || item[0]['sell-price'] ? (
           <div className="text-sm shadow rounded-2xl flex p-1">
@@ -224,12 +224,12 @@ const CardsDisplayer = (props) => {
   const pagePostsLimit = 12
   const datasSanityze = []
   const originalName = []
-  // console.log(cardsDatas)
 
   try {
     for (let item of Object.getOwnPropertyNames(cardsDatas)) {
       // console.log(item)
       originalName.push(item)
+
       datasSanityze.push(cardsDatas[item])
     }
   } catch (err) {
@@ -353,6 +353,7 @@ const CardsDisplayer = (props) => {
     }
   }
 
+  // console.log(cardsDatas)
   // console.log(dataBase)
   // console.log(
   //   datasSanityze
@@ -361,7 +362,8 @@ const CardsDisplayer = (props) => {
   // )
   // console.log(originalName.length)
   // console.log(data)
-  // console.log(datasSanityze)
+
+  console.log()
 
   return (
     <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-gradient-to-t via-myBrown-200  from-myBrown-200">
@@ -652,10 +654,7 @@ const CardsDisplayer = (props) => {
                   return (
                     <Link
                       to={routes.details({
-                        id: originalName[
-                          index + (currentPage - 1) * pagePostsLimit
-                        ],
-                        // id:untrucnouveau
+                        id: item[0].name['name-EUen'].replaceAll(' ', '_'),
                         dataBase,
                       })}
                       key={index}
@@ -688,9 +687,7 @@ const CardsDisplayer = (props) => {
                   return (
                     <Link
                       to={routes.details({
-                        id: originalName[
-                          index + (currentPage - 1) * pagePostsLimit
-                        ],
+                        id: item[0].name['name-EUen'].replaceAll(' ', '_'),
                         dataBase,
                       })}
                       key={index}

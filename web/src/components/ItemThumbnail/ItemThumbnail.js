@@ -2,10 +2,10 @@ import { Link } from '@redwoodjs/router'
 
 import { GiPayMoney, GiReceiveMoney } from 'react-icons/gi'
 
-const HousewareThumbnail = (props) => {
+const ItemThumbnail = (props) => {
   const { state, myRoutes } = props
 
-  console.log(state)
+  // console.log(state)
 
   return (
     <div className="border p-4 m-2 shadow-lg hover:shadow-none rounded w-72 md:w-1/3 bg-myBrown-200">
@@ -62,4 +62,4 @@ const HousewareThumbnail = (props) => {
   )
 }
 
-export default HousewareThumbnail
+export default ItemThumbnail

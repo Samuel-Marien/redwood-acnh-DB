@@ -9,6 +9,7 @@ import ItemThumbnail from 'src/components/ItemThumbnail/ItemThumbnail'
 const PapersPage = () => {
   const [state, setState] = useState([])
   const [stateAll, setStateAll] = useState({})
+  const [myDevId, setMyDevId] = useState('')
 
   const myArray = []
 
@@ -41,6 +42,7 @@ const PapersPage = () => {
           fetch(`https://acnhapi.com/v1/wallmounted/${nameTranslate}`)
             .then((response) => response.json())
             .then((json) => setState(json[0]))
+            .then(setMyDevId(nameTranslate))
         } else {
           console.log('Searching for match...')
         }
@@ -49,6 +51,7 @@ const PapersPage = () => {
       console.log(error)
     }
   }
+  state.devId = myDevId
 
   // console.log(stateAll)
   return (
@@ -64,12 +67,14 @@ const PapersPage = () => {
         ressourcesName="Wallmounted"
         dataBase="wallmounted"
       />
+
+      {/* Display result for one card  */}
       {state['internal-id'] ? (
         <div className="flex justify-center my-2">
           <ItemThumbnail
             state={state}
             myRoutes={routes.details({
-              id: state['internal-id'],
+              id: state.devId,
               dataBase: 'wallmounted',
             })}
           />
