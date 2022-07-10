@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { toast } from '@redwoodjs/web/toast'
+import addToFavorite from 'src/components/miscFunction/addToFavorite'
 
 import { RiHeartAddFill, RiPaintBrushFill } from 'react-icons/ri'
 import { IoCaretBackOutline, IoCaretForwardOutline } from 'react-icons/io5'
@@ -69,20 +69,8 @@ const ItemDetails = (props) => {
   const [prev, setPrev] = useState(0)
   const [next, setNext] = useState(4)
 
-  const { data } = props
+  const { data, dataBase } = props
   // console.log(data)
-
-  const addToFavorite = (item) => {
-    try {
-      {
-        /* Code to save a record... */
-      }
-      toast(`${item.toUpperCase()} \nHas been added to your collection! 🐻`)
-    } catch (e) {
-      // There's also methods for default styling:
-      toast.error('Error creating post...')
-    }
-  }
 
   const changeImageOnClick = (uservariantId) => {
     return data.map((item, index) => {
@@ -128,7 +116,13 @@ const ItemDetails = (props) => {
             <button
               className="text-red-500 text-3xl shadow-inner p-1 rounded-full 
               hover:shadow-none duration-300 cursor-pointer hover:text-red-700 active:text-red-300 "
-              onClick={() => addToFavorite(data[0].name['name-EUfr'])}
+              onClick={() =>
+                addToFavorite(
+                  data[0].name['name-EUfr'],
+                  dataBase,
+                  data[0].name['name-EUen'].replaceAll(' ', '_')
+                )
+              }
             >
               <RiHeartAddFill />
             </button>

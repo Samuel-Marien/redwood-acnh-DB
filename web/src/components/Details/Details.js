@@ -1,4 +1,4 @@
-import { toast } from '@redwoodjs/web/toast'
+import addToFavorite from 'src/components/miscFunction/addToFavorite'
 
 import {
   BiTimeFive,
@@ -45,20 +45,6 @@ const Details = (props) => {
     ? data.availability['month-array-northern'][0]
     : null
 
-  // console.log(newMonthSouthAvailability)
-
-  const addToFavorite = (pokeName) => {
-    try {
-      {
-        /* Code to save a record... */
-      }
-      toast(`${pokeName.toUpperCase()} \nHas been added to your collection! 🐻`)
-    } catch (e) {
-      // There's also methods for default styling:
-      toast.error('Error creating post...')
-    }
-  }
-
   return (
     <>
       {data.name ? (
@@ -67,7 +53,13 @@ const Details = (props) => {
           <div className="flex items-center">
             <button
               className="text-red-500 text-3xl shadow-inner p-1 rounded-full hover:shadow-none duration-300 cursor-pointer hover:text-red-700 active:text-red-300 "
-              onClick={() => addToFavorite(data.name['name-EUfr'])}
+              onClick={() =>
+                addToFavorite(
+                  data.name['name-EUfr'],
+                  dataBase,
+                  data.name['name-EUen'].replaceAll(' ', '_')
+                )
+              }
             >
               <RiHeartAddFill />
             </button>
