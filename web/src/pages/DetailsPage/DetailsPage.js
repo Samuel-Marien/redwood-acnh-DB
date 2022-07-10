@@ -20,7 +20,7 @@ const DetailsPage = ({ id, dataBase }) => {
   }, [id, dataBase])
 
   console.log(state)
-  // console.log(dataBase)
+  console.log(dataBase)
 
   const breadCrumbRouteHelper = (base) => {
     try {
@@ -39,7 +39,7 @@ const DetailsPage = ({ id, dataBase }) => {
           return routes.arts()
         case 'houseware':
           return routes.houseware()
-        case 'papers':
+        case 'wallmounted':
           return routes.papers()
         case 'misc':
           return routes.misc()
@@ -63,7 +63,6 @@ const DetailsPage = ({ id, dataBase }) => {
   return (
     <div className="bgImageFish h-full py-10">
       <MetaTags title="Details" description="Details page" />
-
       {/* Breadcrumn for section != items  */}
       {state.name && dataBase != 'houseware' ? (
         <div className="text-base md:text-xlmb-2 font-inika  mx-auto  text-myYellow-100 lg:w-6/12 w-10/12">
@@ -74,9 +73,10 @@ const DetailsPage = ({ id, dataBase }) => {
           />
         </div>
       ) : null}
-
       {/* breadcrumb for items section  */}
-      {breadCrumbName && dataBase === 'houseware' ? (
+      {(breadCrumbName && dataBase === 'houseware') ||
+      dataBase === 'wallmounted' ||
+      dataBase === 'misc' ? (
         <div className="text-base md:text-xlmb-2 font-inika  mx-auto  text-myYellow-100 w-10/12 xl:w-7/12 2xl:w-5/12">
           <MyBreadCrumb
             dataBase={dataBase}
@@ -90,24 +90,22 @@ const DetailsPage = ({ id, dataBase }) => {
       {dataBase === 'fish' || dataBase === 'sea' || dataBase === 'bugs' ? (
         <Details data={state} dataBase={dataBase} />
       ) : null}
-
       {/* Display info for villagers   */}
       {dataBase === 'villagers' ? (
         <VillagerDetails data={state} dataBase={dataBase} />
       ) : null}
-
       {/* Display infos for songs  */}
       {dataBase === 'songs' ? (
         <SongDetails data={state} dataBase={dataBase} />
       ) : null}
-
       {/* Display infos for art  */}
       {dataBase === 'art' ? (
         <ArtDetails data={state} dataBase={dataBase} />
       ) : null}
-
-      {/* Display infos for house, ..., ...  */}
-      {dataBase === 'houseware' ? (
+      {/* Display infos for house, wallmounted, misc  */}
+      {dataBase === 'houseware' ||
+      dataBase === 'wallmounted' ||
+      dataBase === 'misc' ? (
         <ItemDetails data={state} dataBase={dataBase} />
       ) : null}
     </div>

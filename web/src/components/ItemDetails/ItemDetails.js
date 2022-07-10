@@ -10,6 +10,7 @@ import {
   GiGearStickPattern,
   GiBookshelf,
   GiForest,
+  GiClosedDoors,
 } from 'react-icons/gi'
 import { MdPhotoSizeSelectSmall, MdLabelImportantOutline } from 'react-icons/md'
 import { GoVersions } from 'react-icons/go'
@@ -40,7 +41,7 @@ const MyInteractiveLogo = (props) => {
   return (
     <div
       className={
-        'bg-white text-3xl p-2 shadow w-max rounded-full ' +
+        'bg-white text-xl md:text-3xl p-2 shadow w-max rounded-full ' +
         `${data ? 'text-green-500' : 'text-red-400'}`
       }
     >
@@ -513,6 +514,13 @@ const ItemDetails = (props) => {
                       icon={<GiForest />}
                     />
                   </div>
+                  <div className="has-tooltip block md:hidden">
+                    <MyTooltip title="Can the item be a door deco?" />
+                    <MyInteractiveLogo
+                      data={data[0].isDoorDeco}
+                      icon={<GiClosedDoors />}
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -550,6 +558,13 @@ const ItemDetails = (props) => {
                     <MyInteractiveLogo
                       data={data[0].isOutdoor}
                       icon={<GiForest />}
+                    />
+                  </div>
+                  <div className="has-tooltip">
+                    <MyTooltip title="Can the item a be door deco?" />
+                    <MyInteractiveLogo
+                      data={data[0].isDoorDeco}
+                      icon={<GiClosedDoors />}
                     />
                   </div>
                 </div>
