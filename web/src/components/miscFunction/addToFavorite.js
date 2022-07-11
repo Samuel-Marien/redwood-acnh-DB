@@ -4,6 +4,7 @@ const addToFavorite = (name, db, urlName) => {
   try {
     {
       // alert(db + '\n ' + urlName) /* Code to save a record... */
+      console.log(db + '\n' + urlName)
     }
     toast(`${name.toUpperCase()} \nHas been added to your collection! 🐻`)
   } catch (e) {

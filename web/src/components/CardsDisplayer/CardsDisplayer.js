@@ -5,6 +5,8 @@ import { Pagination } from 'react-pagination-bar'
 import 'react-pagination-bar/dist/index.css'
 import './index.css'
 
+import addToFavorite from 'src/components/miscFunction/addToFavorite'
+
 import {
   BsSortNumericDown,
   BsSortNumericUpAlt,
@@ -26,9 +28,10 @@ import { FaUserTag } from 'react-icons/fa'
 import { SiShadow } from 'react-icons/si'
 import { MdMoneyOff } from 'react-icons/md'
 import { VscVersions } from 'react-icons/vsc'
+import { RiHeartAddFill } from 'react-icons/ri'
 
 const Card = (props) => {
-  const { item } = props
+  const { item, myDataBase, myRoute } = props
 
   // locationCut: cut if it's multiple's words description
   const locationCut = (locationWord) => {
@@ -55,24 +58,41 @@ const Card = (props) => {
               ? item.name['name-EUfr'].slice(0, 10) + ' ...'
               : item.name['name-EUfr']}
           </span>
+          {/* button here */}
+          <button
+            className="text-red-500 shadow-inner p-1 rounded-full 
+              hover:shadow-none duration-300 cursor-pointer hover:text-red-700 active:text-red-300 "
+            onClick={() =>
+              addToFavorite(
+                item.name['name-EUfr'],
+                myDataBase,
+                item.name['name-EUen'].replaceAll(' ', '_')
+              )
+            }
+          >
+            <RiHeartAddFill />
+          </button>
+          {/* Button end here  */}
         </p>
         <p className="text-sm text-myPink-100">
           #<span className="text-lg font-bold text-myBrown-100">{item.id}</span>
         </p>
       </div>
       {item.icon_uri ? (
-        <div
-          className="flex justify-center rounded-full m-4 bg-myBrown-200"
-          style={{
-            border: `${
-              item['bubble-color']
-                ? `6px solid ${item['bubble-color']}`
-                : `6px solid pink`
-            }`,
-          }}
-        >
-          <img src={item.icon_uri} alt={item.name['name-EUfr']} />
-        </div>
+        <Link to={myRoute}>
+          <div
+            className="flex justify-center rounded-full m-4 bg-myBrown-200"
+            style={{
+              border: `${
+                item['bubble-color']
+                  ? `6px solid ${item['bubble-color']}`
+                  : `6px solid pink`
+              }`,
+            }}
+          >
+            <img src={item.icon_uri} alt={item.name['name-EUfr']} />
+          </div>
+        </Link>
       ) : (
         <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
           <img src={item.image_uri} alt={item.name['name-EUfr']} />
@@ -152,12 +172,27 @@ const Card = (props) => {
 }
 
 const Card2 = (props) => {
-  const { item } = props
+  const { item, myDataBase, myRoute } = props
   return (
     <div className=" font-inika border p-3 m-2 shadow-lg hover:shadow-none bg-white rounded-xl w-48">
       <div className="flex justify-between items-center">
         <p className=" uppercase font-bold text-myBrown-100">
           {item[0].name['name-EUfr']}
+          {/* button here */}
+          <button
+            className="text-red-500 shadow-inner p-1 rounded-full 
+              hover:shadow-none duration-300 cursor-pointer hover:text-red-700 active:text-red-300 "
+            onClick={() =>
+              addToFavorite(
+                item[0].name['name-EUfr'],
+                myDataBase,
+                item[0].name['name-EUen'].replaceAll(' ', '_')
+              )
+            }
+          >
+            <RiHeartAddFill />
+          </button>
+          {/* Button end here  */}
         </p>
         <p className="text-xs text-myPink-100">
           #
@@ -166,9 +201,11 @@ const Card2 = (props) => {
           </span>
         </p>
       </div>
-      <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
-        <img src={item[0].image_uri} alt={item[0].name['name-EUfr']} />
-      </div>
+      <Link to={myRoute}>
+        <div className="flex justify-center border-4 border-myPink-200 rounded-full m-4 bg-myBrown-200">
+          <img src={item[0].image_uri} alt={item[0].name['name-EUfr']} />
+        </div>
+      </Link>
       <div className="flex justify-center w-full text-myYellow-100">
         {item[0]['buy-price'] || item[0]['sell-price'] ? (
           <div className="text-sm shadow rounded-2xl flex p-1">
@@ -362,8 +399,6 @@ const CardsDisplayer = (props) => {
   // )
   // console.log(originalName.length)
   // console.log(data)
-
-  console.log()
 
   return (
     <div className="px-0 sm:px-20 md:px-32 lg:px-60 bg-gradient-to-t via-myBrown-200  from-myBrown-200">
@@ -607,6 +642,8 @@ const CardsDisplayer = (props) => {
             </nav>
           </div>
         </div>
+
+        {/* Pagination bloc */}
         {datasSanityze.length ? (
           <Pagination
             initialPage={currentPage}
@@ -629,6 +666,7 @@ const CardsDisplayer = (props) => {
         ) : null}
       </div>
 
+      {/* Displayer section */}
       <div className="flex flex-row justify-center flex-wrap">
         {data.length < 1 && datasSanityze
           ? datasSanityze
@@ -643,24 +681,24 @@ const CardsDisplayer = (props) => {
                   dataBase !== 'misc'
                 ) {
                   return (
-                    <Link
-                      to={routes.details({ id: item.id, dataBase })}
+                    <Card
                       key={item.id}
-                    >
-                      <Card item={item} myDataBase={dataBase} />
-                    </Link>
+                      item={item}
+                      myDataBase={dataBase}
+                      myRoute={routes.details({ id: item.id, dataBase })}
+                    />
                   )
                 } else {
                   return (
-                    <Link
-                      to={routes.details({
+                    <Card2
+                      key={index}
+                      item={item}
+                      myDataBase={dataBase}
+                      myRoute={routes.details({
                         id: item[0].name['name-EUen'].replaceAll(' ', '_'),
                         dataBase,
                       })}
-                      key={index}
-                    >
-                      <Card2 item={item} />
-                    </Link>
+                    />
                   )
                 }
               })
@@ -676,24 +714,24 @@ const CardsDisplayer = (props) => {
                   dataBase !== 'misc'
                 ) {
                   return (
-                    <Link
-                      to={routes.details({ id: item.id, dataBase })}
+                    <Card
                       key={item.id}
-                    >
-                      <Card item={item} myDataBase={dataBase} />
-                    </Link>
+                      item={item}
+                      myDataBase={dataBase}
+                      myRoute={routes.details({ id: item.id, dataBase })}
+                    />
                   )
                 } else {
                   return (
-                    <Link
-                      to={routes.details({
+                    <Card2
+                      key={index}
+                      item={item}
+                      myDataBase={dataBase}
+                      myRoute={routes.details({
                         id: item[0].name['name-EUen'].replaceAll(' ', '_'),
                         dataBase,
                       })}
-                      key={index}
-                    >
-                      <Card2 item={item} />
-                    </Link>
+                    />
                   )
                 }
               })}

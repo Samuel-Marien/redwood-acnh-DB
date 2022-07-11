@@ -50,7 +50,7 @@ const FishsPagePage = () => {
       .then((json) => setState(json))
   }
 
-  console.log(state.id)
+  // console.log(state.id)
   return (
     <>
       <MetaTags title="FishsPage" description="FishsPage page" />

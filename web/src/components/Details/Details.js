@@ -22,7 +22,7 @@ const currentMonth = new Date().getMonth() + 1
 const Details = (props) => {
   const { data, dataBase } = props
 
-  console.log(dataBase)
+  // console.log(dataBase)
   // console.log(data)
 
   const lastMonthSouthAvailability = data.availability
