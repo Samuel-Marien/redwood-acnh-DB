@@ -13,6 +13,9 @@ model Post {
   title     String
   body      String
   ImageSrc  String
+  authorId  Int
+  author    User    @relation(fields: [authorId], references: [id])
+  published Boolean @default(true)
   createdAt DateTime @default(now())
 }
 
@@ -28,8 +31,26 @@ model User {
   id                  Int       @id @default(autoincrement())
   name                String?
   email               String    @unique
+  posts               Post[]
+  collections         Collection[]
   hashedPassword      String
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
+}
+
+model Collection {
+  id             Int     @id @default(autoincrement())
+  ownerId        Int
+  owner          User    @relation(fields: [ownerId], references: [id])
+  fish           String[]
+  sea            String[]
+  bugs           String[]
+  villagers      String[]
+  songs          String[]
+  art            String[]
+  houseware      String[]
+  wallmounted    String[]
+  misc           String[]
+  createdAt DateTime @default(now())
 }
