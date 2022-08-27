@@ -1,4 +1,13 @@
 import { toast } from '@redwoodjs/web/toast'
+// import { MetaTags, useMutation } from '@redwoodjs/web'
+
+// const CREATE_COLLECTION = gql`
+//   mutation CreateCollectiontMutation($input: CreateCollectionInput!) {
+//     createCollection(input: $input) {
+//       id
+//     }
+//   }
+// `
 
 const addToFavorite = (name, db, urlName) => {
   try {

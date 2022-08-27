@@ -1,5 +1,9 @@
+import { useMutation } from '@redwoodjs/web'
+import { useAuth } from '@redwoodjs/auth'
 import { useState } from 'react'
-import addToFavorite from 'src/components/miscFunction/addToFavorite'
+
+// import addToFavorite from 'src/components/miscFunction/addToFavorite'
+import { toast } from '@redwoodjs/web/toast'
 
 import { RiHeartAddFill, RiPaintBrushFill } from 'react-icons/ri'
 import { IoCaretBackOutline, IoCaretForwardOutline } from 'react-icons/io5'
@@ -59,7 +63,17 @@ const MyTooltip = (props) => {
   )
 }
 
+const CREATE_COLLECTION = gql`
+  mutation CreateCollectiontMutation($input: CreateCollectionInput!) {
+    createCollection(input: $input) {
+      id
+    }
+  }
+`
+
 const ItemDetails = (props) => {
+  const { currentUser } = useAuth()
+  const [create, { loading }] = useMutation(CREATE_COLLECTION)
   const [state, setState] = useState(0)
   const [myVariant, setMyVariant] = useState('')
   const [myColor1, setMyColor1] = useState('')
@@ -68,7 +82,7 @@ const ItemDetails = (props) => {
   const [myPatternTitle, setMyPatternTitle] = useState('')
   const [prev, setPrev] = useState(0)
   const [next, setNext] = useState(4)
-
+  // console.log(currentUser)
   const { data, dataBase } = props
   // console.log(data)
 
@@ -104,6 +118,19 @@ const ItemDetails = (props) => {
     }
   }
 
+  const addToFavorite = (name, db, urlName) => {
+    try {
+      {
+        create({ variables: { input: currentUser.id } })
+        console.log(db + '\n' + urlName)
+      }
+      toast(`${name.toUpperCase()} \nHas been added to your collection! 🐻`)
+    } catch (e) {
+      // There's also methods for default styling:
+      toast.error('Error creating post...')
+    }
+  }
+
   return (
     <>
       {data.length !== 0 ? (
@@ -114,6 +141,7 @@ const ItemDetails = (props) => {
           {/* header  */}
           <div className="flex items-center">
             <button
+              disabled={loading}
               className="text-red-500 text-3xl shadow-inner p-1 rounded-full 
               hover:shadow-none duration-300 cursor-pointer hover:text-red-700 active:text-red-300 "
               onClick={() =>
