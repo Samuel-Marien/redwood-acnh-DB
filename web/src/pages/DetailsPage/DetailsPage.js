@@ -21,6 +21,8 @@ const DetailsPage = ({ id, dataBase }) => {
 
   // console.log(state)
   // console.log(dataBase)
+  // console.log(state)
+  // console.log(dataBase)
 
   const breadCrumbRouteHelper = (base) => {
     try {
